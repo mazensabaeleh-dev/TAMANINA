@@ -1,0 +1,6 @@
+{
+  "name": "طمأنينة",
+  "description": "منصة مدرسية متكاملة لقياس النبض العاطفي والنفسي للطلاب والمجتمع المحلي، الدعم السري الفوري، تمارين التنفس المهدئة، ولوحة تحكم شاملة للمرشد الطلابي والإدارة",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

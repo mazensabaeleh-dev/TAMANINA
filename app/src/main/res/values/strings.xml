@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">طمأنينة</string>
+    <string name="app_subtitle">النبض العاطفي والدعم النفسي المدرسي</string>
+    <string name="join_quick_checkin">التعبير عن المشاعر (15 ثانية)</string>
+    <string name="counselor_dashboard">لوحة تحكم المرشد والإدارة</string>
+    <string name="anonymous_badge">مجهول الهوية وسري 100%</string>
+    <string name="safe_environment_tagline">بيئة آمنة لحماية مشاعر واستقرار الطلاب والمجتمع المحلي</string>
+</resources>

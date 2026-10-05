@@ -1,0 +1,2911 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>طمأنينة - المساحة النفسية الآمنة لطلاب المدرسة والمجتمع المحلي</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="chart.min.js"></script>
+  <style>
+    :root {
+      --primary: #0d9488;
+      --primary-dark: #0f3e3a;
+      --primary-light: #5eead4;
+      --primary-bg: #f0fdfa;
+      --emerald: #059669;
+      --slate-900: #0f172a;
+      --slate-800: #1e293b;
+      --slate-700: #334155;
+      --slate-600: #475569;
+      --slate-400: #94a3b8;
+      --slate-200: #e2e8f0;
+      --slate-100: #f8fafc;
+      --slate-50: #ffffff;
+      
+      /* Harmonized Pastel Palette */
+      --joy-color: #d97706;
+      --joy-bg: #fffbeb;
+      --calm-color: #059669;
+      --calm-bg: #ecfdf5;
+      --sad-color: #2563eb;
+      --sad-bg: #eff6ff;
+      --anxious-color: #7c3aed;
+      --anxious-bg: #f5f3ff;
+      --exhausted-color: #475569;
+      --exhausted-bg: #f1f5f9;
+      --bored-color: #78716c;
+      --bored-bg: #f5f5f4;
+      --angry-color: #dc2626;
+      --angry-bg: #fef2f2;
+      --fear-color: #4f46e5;
+      --fear-bg: #eef2ff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Cairo', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background: linear-gradient(180deg, #f0fdfa 0%, #f8fafc 100%);
+      color: var(--slate-900);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Minimal, Serene Public Header */
+    header {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+      padding: 16px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-icon {
+      width: 42px;
+      height: 42px;
+      background: linear-gradient(135deg, var(--primary), #047857);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      box-shadow: 0 4px 14px rgba(13, 148, 136, 0.25);
+    }
+
+    .brand-text h1 {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--slate-900);
+      letter-spacing: -0.3px;
+      line-height: 1.2;
+    }
+
+    .brand-text p {
+      font-size: 12px;
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .discreet-badge {
+      background: rgba(13, 148, 136, 0.08);
+      color: var(--primary);
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Main Container */
+    main {
+      flex: 1;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 28px 20px 48px;
+      width: 100%;
+    }
+
+    /* Calming Hero Section */
+    .hero-box {
+      text-align: center;
+      margin-bottom: 28px;
+      padding: 12px 10px;
+    }
+
+    .hero-box h2 {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--slate-900);
+      margin-bottom: 8px;
+      letter-spacing: -0.5px;
+    }
+
+    .hero-box p {
+      font-size: 15px;
+      color: var(--slate-600);
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* Harmonic Emotions Grid */
+    .emotions-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-bottom: 26px;
+    }
+
+    @media (min-width: 640px) {
+      .emotions-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+      }
+    }
+
+    .emotion-card {
+      background: white;
+      border-radius: 18px;
+      padding: 20px 14px;
+      text-align: center;
+      border: 1.5px solid var(--slate-200);
+      cursor: pointer;
+      transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .emotion-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.06);
+    }
+
+    .emotion-card.selected {
+      border-color: var(--primary);
+      box-shadow: 0 8px 24px rgba(13, 148, 136, 0.15);
+      background: var(--primary-bg);
+    }
+
+    .emotion-emoji-circle {
+      width: 54px;
+      height: 54px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      margin-bottom: 12px;
+      transition: transform 0.2s ease;
+    }
+
+    .emotion-card:hover .emotion-emoji-circle {
+      transform: scale(1.1);
+    }
+
+    .emotion-card h3 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--slate-900);
+      margin-bottom: 4px;
+    }
+
+    .emotion-card p {
+      font-size: 11px;
+      color: var(--slate-600);
+      line-height: 1.4;
+    }
+
+    /* Reasons Section */
+    .reasons-box {
+      background: white;
+      border-radius: 20px;
+      padding: 24px;
+      border: 1px solid var(--slate-200);
+      box-shadow: 0 3px 12px rgba(0,0,0,0.02);
+      margin-bottom: 24px;
+      animation: slideUp 0.3s ease;
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .reasons-box h4 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--slate-900);
+      margin-bottom: 12px;
+    }
+
+    .reasons-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .reason-chip {
+      padding: 9px 16px;
+      background: var(--slate-100);
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--slate-700);
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.18s ease;
+    }
+
+    .reason-chip:hover, .reason-chip.selected {
+      background: var(--primary-bg);
+      color: var(--primary-dark);
+      border-color: var(--primary);
+    }
+
+    .note-input {
+      width: 100%;
+      margin-top: 14px;
+      padding: 14px;
+      border-radius: 14px;
+      border: 1px solid var(--slate-200);
+      font-size: 14px;
+      min-height: 80px;
+      resize: vertical;
+      background: var(--slate-50);
+      transition: border 0.2s ease;
+    }
+
+    .note-input:focus {
+      outline: none;
+      border-color: var(--primary);
+      background: white;
+    }
+
+    .submit-btn {
+      width: 100%;
+      margin-top: 16px;
+      padding: 14px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 14px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 14px rgba(13, 148, 136, 0.3);
+    }
+
+    .submit-btn:hover {
+      background: #0f766e;
+      transform: translateY(-1px);
+    }
+
+    /* Serene Reassurance & Breathing */
+    .reassurance-card {
+      background: white;
+      border-radius: 20px;
+      padding: 26px;
+      border: 1px solid var(--primary-light);
+      background: linear-gradient(135deg, #ffffff, #f0fdfa);
+      box-shadow: 0 6px 20px rgba(13, 148, 136, 0.08);
+      margin-bottom: 24px;
+    }
+
+    .reassurance-card h3 {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--primary-dark);
+      margin-bottom: 8px;
+    }
+
+    .reassurance-card p {
+      font-size: 15px;
+      color: var(--slate-700);
+      line-height: 1.7;
+    }
+
+    /* Calming Breathing Animation */
+    .breathing-card {
+      background: linear-gradient(145deg, #0f172a, #134e4a);
+      color: white;
+      border-radius: 24px;
+      padding: 32px 20px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.15);
+      margin-bottom: 24px;
+    }
+
+    .breathing-circle {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: rgba(94, 234, 212, 0.15);
+      border: 3.5px solid var(--primary-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 20px 0;
+      animation: pulseBreathe 8s infinite ease-in-out;
+      font-size: 15px;
+      font-weight: 700;
+      color: #ccfbf1;
+    }
+
+    @keyframes pulseBreathe {
+      0%, 100% { transform: scale(1); border-color: var(--primary-light); }
+      50% { transform: scale(1.35); border-color: #34d399; background: rgba(52, 211, 153, 0.25); color: #ffffff; }
+    }
+
+    /* Student Experience Section Navigation */
+    .student-nav-bar {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      margin-bottom: 22px;
+      flex-wrap: wrap;
+      background: white;
+      padding: 8px;
+      border-radius: 18px;
+      border: 1px solid var(--slate-200);
+      box-shadow: 0 4px 14px rgba(0,0,0,0.03);
+    }
+
+    .student-nav-btn {
+      padding: 10px 18px;
+      background: transparent;
+      border: 1.5px solid transparent;
+      border-radius: 12px;
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--slate-700);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      font-family: inherit;
+    }
+
+    .student-nav-btn:hover {
+      background: var(--slate-100);
+      color: var(--primary);
+    }
+
+    .student-nav-btn.active {
+      background: var(--primary-bg);
+      color: var(--primary-dark);
+      border-color: var(--primary);
+      box-shadow: 0 2px 8px rgba(13, 148, 136, 0.15);
+    }
+
+    .student-sub-section {
+      display: none;
+      animation: fadeIn 0.25s ease;
+    }
+
+    .student-sub-section.active {
+      display: block;
+    }
+
+    /* Confidential Support Invitation & Direct Message Box */
+    .student-message-box {
+      background: white;
+      border-radius: 20px;
+      padding: 24px;
+      border: 1.5px solid #ccfbf1;
+      box-shadow: 0 10px 30px rgba(13, 148, 136, 0.08);
+      margin-top: 10px;
+      margin-bottom: 26px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .student-message-box::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #0d9488, #10b981);
+    }
+
+    .message-category-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 12px 0;
+    }
+
+    .category-chip {
+      padding: 7px 14px;
+      background: var(--slate-100);
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--slate-700);
+      cursor: pointer;
+      border: 1px solid var(--slate-200);
+      transition: all 0.2s ease;
+    }
+
+    .category-chip:hover, .category-chip.selected {
+      background: var(--primary-bg);
+      color: var(--primary-dark);
+      border-color: var(--primary);
+    }
+
+    /* Floating / Quick Help Pill */
+    .quick-support-banner {
+      background: linear-gradient(135deg, #f0fdfa 0%, #e6fffa 100%);
+      border: 1.5px solid #99f6e4;
+      border-radius: 16px;
+      padding: 14px 18px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .quick-support-banner:hover {
+      box-shadow: 0 6px 20px rgba(13, 148, 136, 0.12);
+      transform: translateY(-1px);
+    }
+
+    /* Track Ticket Card */
+    .track-ticket-card {
+      background: white;
+      border-radius: 20px;
+      padding: 24px;
+      border: 1.5px solid var(--slate-200);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.04);
+      margin-top: 10px;
+      margin-bottom: 24px;
+    }
+
+    /* Counselor Reply Card on Student Side */
+    .counselor-reply-box {
+      background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
+      border: 1.5px solid #86efac;
+      border-radius: 16px;
+      padding: 18px 20px;
+      margin-top: 16px;
+    }
+
+    /* Executive Dashboard Navigation Tabs */
+    .dashboard-tabs {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding: 6px;
+      background: #f1f5f9;
+      border-radius: 14px;
+      margin-bottom: 22px;
+    }
+
+    .dash-tab-btn {
+      padding: 10px 18px;
+      background: transparent;
+      border: none;
+      border-radius: 10px;
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--slate-600);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+    }
+
+    .dash-tab-btn:hover {
+      color: var(--primary);
+      background: rgba(255, 255, 255, 0.7);
+    }
+
+    .dash-tab-btn.active {
+      color: var(--primary-dark);
+      background: white;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    }
+
+    .dash-tab-badge {
+      background: #fee2e2;
+      color: #dc2626;
+      font-size: 11px;
+      padding: 2px 7px;
+      border-radius: 10px;
+      font-weight: 800;
+    }
+
+    .admin-tab-pane {
+      display: none;
+      animation: fadeIn 0.25s ease;
+    }
+
+    .admin-tab-pane.active {
+      display: block;
+    }
+
+    .support-invite-box {
+      background: white;
+      border-radius: 18px;
+      padding: 18px 22px;
+      border: 1px dashed var(--slate-200);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .support-invite-box:hover {
+      border-color: var(--primary);
+      background: #fcfdfd;
+    }
+
+    .support-invite-text h5 {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--slate-800);
+      margin-bottom: 2px;
+    }
+
+    .support-invite-text p {
+      font-size: 12px;
+      color: var(--slate-600);
+    }
+
+    .invite-btn {
+      padding: 8px 16px;
+      background: var(--primary-bg);
+      color: var(--primary-dark);
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 12px;
+      border: none;
+    }
+
+    /* Counselor Dashboard Styles */
+    .counselor-dashboard-view {
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .dashboard-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      gap: 12px;
+      background: white;
+      padding: 20px;
+      border-radius: 20px;
+      border: 1px solid var(--slate-200);
+    }
+
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .stat-card {
+      background: white;
+      border-radius: 18px;
+      padding: 20px;
+      border: 1px solid var(--slate-200);
+    }
+
+    .stat-value {
+      font-size: 32px;
+      font-weight: 900;
+      color: var(--primary-dark);
+      margin: 4px 0;
+    }
+
+    .time-filter-wrap {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      background: white;
+      padding: 12px 16px;
+      border-radius: 14px;
+      border: 1px solid var(--slate-200);
+      align-items: center;
+    }
+
+    /* Footer with Discreet Counselor Access */
+    footer {
+      text-align: center;
+      padding: 24px 16px;
+      font-size: 13px;
+      color: var(--slate-600);
+      border-top: 1px solid var(--slate-200);
+      margin-top: auto;
+      background: white;
+    }
+
+    .footer-tagline {
+      font-weight: 600;
+      color: var(--slate-700);
+      margin-bottom: 6px;
+    }
+
+    .discreet-counselor-link {
+      color: var(--slate-400);
+      text-decoration: none;
+      font-size: 11px;
+      transition: color 0.2s ease;
+      cursor: pointer;
+    }
+
+    .discreet-counselor-link:hover {
+      color: var(--primary);
+    }
+
+    /* Modal Styling */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(4px);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .modal-content {
+      background: white;
+      border-radius: 24px;
+      padding: 28px;
+      width: 100%;
+      max-width: 480px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+    }
+
+    .modal-content h3 {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--slate-900);
+      margin-bottom: 6px;
+    }
+
+    .modal-content p {
+      font-size: 13px;
+      color: var(--slate-600);
+      margin-bottom: 18px;
+    }
+
+    .modal-input {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--slate-200);
+      font-size: 14px;
+      margin-bottom: 14px;
+    }
+
+    @media (max-width: 640px) {
+      header {
+        padding: 12px 16px;
+      }
+      .brand-icon {
+        width: 38px;
+        height: 38px;
+        font-size: 20px;
+      }
+      .brand-text h1 {
+        font-size: 18px;
+      }
+      .hero-box {
+        padding: 22px 16px;
+      }
+      .hero-box h2 {
+        font-size: 20px;
+      }
+      .dashboard-header {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .dashboard-header > div:last-child {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+      }
+      .dashboard-header .invite-btn {
+        width: 100%;
+        text-align: center;
+      }
+      .modal-content {
+        width: 92%;
+        padding: 20px 16px;
+      }
+      .emotions-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+      }
+      .emotion-card {
+        padding: 16px 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Minimal & Harmonic Header for Public -->
+  <header>
+    <div class="brand">
+      <div class="brand-icon">🌿</div>
+      <div class="brand-text">
+        <h1>طمأنينة</h1>
+        <p>المساحة المدرسية الآمنة لراحة بالك</p>
+      </div>
+    </div>
+
+    <div class="discreet-badge">
+      <span>🔒 سري ومجهول الهوية 100%</span>
+    </div>
+  </header>
+
+  <!-- Main Student Experience -->
+  <main id="studentMainView">
+    <!-- Student Navigation Bar -->
+    <div class="student-nav-bar" id="studentNavBar">
+      <button class="student-nav-btn active" id="btnStudentTabPulse" onclick="switchStudentSection('pulse')">
+        <span>🌿</span>
+        <span>نبضة المشاعر اليومية</span>
+      </button>
+      <button class="student-nav-btn" id="btnStudentTabMessage" onclick="switchStudentSection('message')">
+        <span>💌</span>
+        <span>صندوق الرسائل للمرشد</span>
+        <span style="background: #0d9488; color: white; font-size: 10.5px; padding: 2px 7px; border-radius: 10px; margin-right: 2px;">سري</span>
+      </button>
+      <button class="student-nav-btn" id="btnStudentTabTrack" onclick="switchStudentSection('track')">
+        <span>🔍</span>
+        <span>متابعة رد المرشد</span>
+      </button>
+    </div>
+
+    <!-- SECTION 1: Pulse & Daily Check-in -->
+    <div id="studentPulseSection" class="student-sub-section active">
+      <div class="hero-box">
+        <h2>«توقف لحظة.. كيف تشعر اليوم؟»</h2>
+        <p>
+          مشاعرك ذات قيمة ومحل تقدير دائم. اختر ما يصف إحساسك الحالي لتصلك رسالة مساندة مخصصة لك.
+        </p>
+      </div>
+
+      <!-- Quick Support Callout Banner -->
+      <div class="quick-support-banner" onclick="switchStudentSection('message')">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <div style="width: 40px; height: 40px; border-radius: 12px; background: #ccfbf1; color: #0f766e; display: flex; align-items: center; justify-content: center; font-size: 20px;">
+            💌
+          </div>
+          <div>
+            <strong style="color: #0f766e; font-size: 14px; display: block;">هل ترغب بالتحدث مباشرة أو كتابة رسالة خاصة للمرشد الطلابي؟</strong>
+            <span style="color: var(--slate-600); font-size: 12px;">صندوق الرسائل والمصارحة متاح ومفعل لك في أي وقت بسرية تامة 100%.</span>
+          </div>
+        </div>
+        <button class="invite-btn" style="background: var(--primary); color: white; padding: 8px 16px; border-radius: 10px;">
+          ✍️ اكتب للمرشد الآن
+        </button>
+      </div>
+
+      <!-- 8 Harmonized Emotions Grid -->
+      <div class="emotions-grid">
+        <div class="emotion-card" onclick="selectEmotion('JOY', '😊', 'الفرح', 'طاقة إيجابية ورضا وسعادة', this)">
+          <div class="emotion-emoji-circle" style="background: var(--joy-bg); color: var(--joy-color);">😊</div>
+          <h3>الفرح</h3>
+          <p>طاقة إيجابية ورضا</p>
+        </div>
+
+        <div class="emotion-card" onclick="selectEmotion('CALM', '🌿', 'الهدوء', 'سكينة وسلام داخلي وارتياح', this)">
+          <div class="emotion-emoji-circle" style="background: var(--calm-bg); color: var(--calm-color);">🌿</div>
+          <h3>الهدوء</h3>
+          <p>سكينة وسلام داخلي</p>
+        </div>
+
+        <div class="emotion-card" onclick="selectEmotion('SAD', '🌧️', 'الحزن', 'مشاعر هبوط، ضيق أو ثقل', this)">
+          <div class="emotion-emoji-circle" style="background: var(--sad-bg); color: var(--sad-color);">🌧️</div>
+          <h3>الحزن</h3>
+          <p>مشاعر ضيق وثقل</p>
+        </div>
+
+        <div class="emotion-card" onclick="selectEmotion('ANXIOUS', '⚡', 'القلق', 'تسارع أفكار وتوتر من القادم', this)">
+          <div class="emotion-emoji-circle" style="background: var(--anxious-bg); color: var(--anxious-color);">⚡</div>
+          <h3>القلق</h3>
+          <p>توتر وتفكير متسارع</p>
+        </div>
+
+        <div class="emotion-card" onclick="selectEmotion('EXHAUSTED', '🔋', 'الإرهاق', 'تعب واستنزاف للطاقة', this)">
+          <div class="emotion-emoji-circle" style="background: var(--exhausted-bg); color: var(--exhausted-color);">🔋</div>
+          <h3>الإرهاق</h3>
+          <p>تعب واستنزاف طاقة</p>
+        </div>
+
+        <div class="emotion-card" onclick="selectEmotion('BORED', '⏳', 'الملل', 'فقدان الشغف بالروتين اليومي', this)">
+          <div class="emotion-emoji-circle" style="background: var(--bored-bg); color: var(--bored-color);">⏳</div>
+          <h3>الملل</h3>
+          <p>رتابة وضعف حماس</p>
+        </div>
+
+        <div class="emotion-card" onclick="selectEmotion('ANGRY', '🔥', 'الغضب', 'انفعال حاد أو إحساس بالضيق', this)">
+          <div class="emotion-emoji-circle" style="background: var(--angry-bg); color: var(--angry-color);">🔥</div>
+          <h3>الغضب</h3>
+          <p>انفعال ورغبة بالتفريغ</p>
+        </div>
+
+        <div class="emotion-card" onclick="selectEmotion('FEAR', '🛡️', 'الخوف', 'رهبة أو تخوف من موقف أو تقييم', this)">
+          <div class="emotion-emoji-circle" style="background: var(--fear-bg); color: var(--fear-color);">🛡️</div>
+          <h3>الخوف</h3>
+          <p>رهبة وتخوف من مواجهة</p>
+        </div>
+      </div>
+
+      <!-- Reasons Context Section -->
+      <div id="reasonsSection" class="reasons-box" style="display: none;">
+        <h4>هل هناك سبب مرتبط بشعورك؟ (اختياري)</h4>
+        <div class="reasons-wrap">
+          <div class="reason-chip" onclick="toggleReason(this, 'الدراسة والاختبارات')">📚 الدراسة والاختبارات</div>
+          <div class="reason-chip" onclick="toggleReason(this, 'الأصدقاء والعلاقات')">🤝 الأصدقاء والعلاقات</div>
+          <div class="reason-chip" onclick="toggleReason(this, 'المنزل والأسرة')">🏡 المنزل والأسرة</div>
+          <div class="reason-chip" onclick="toggleReason(this, 'الضغوطات والمسؤوليات')">⏳ الضغوطات والمسؤوليات</div>
+          <div class="reason-chip" onclick="toggleReason(this, 'التنمر أو المضايقة')">🛡️ التنمر أو المضايقة</div>
+          <div class="reason-chip" onclick="toggleReason(this, 'الصحة والنوم والنشاط')">💤 الصحة والنوم والنشاط</div>
+          <div class="reason-chip" onclick="toggleReason(this, 'شعور عام بدون سبب محدد')">✨ شعور عام</div>
+        </div>
+
+        <textarea id="optionalNote" class="note-input" placeholder="أضف تفريغاً أو كلمات بسيطة إن أحببت (سري تماماً)..."></textarea>
+
+        <button class="submit-btn" onclick="submitPulse()">
+          تسجيل النبضة واستلام رسالة الطمأنينة ✨
+        </button>
+      </div>
+
+      <!-- Reassurance Card -->
+      <div id="reassuranceBox" style="display: none;">
+        <div class="reassurance-card">
+          <h3 id="reassuranceTitle">رسالة طمأنينة خاصة لك</h3>
+          <p id="reassuranceText"></p>
+        </div>
+
+        <!-- Breathing Exercise -->
+        <div class="breathing-card">
+          <h3 style="font-size: 20px; font-weight: 800;">تمرين التنفس المهدئ (4-4-4)</h3>
+          <p style="font-size: 13px; color: #99f6e4; max-width: 480px; margin-top: 4px;">
+            تابع حركة الدائرة ببطء: شهيق عميق مع اتساعها، احبس أنفاسك بهدوء، ثم ازفر بنعومة مع انكماشها.
+          </p>
+          <div class="breathing-circle">تنفس بهدوء</div>
+          <p style="font-size: 12px; color: #94a3b8;">كرر التمرين لدقيقة واحدة واستشعر عودة التوازن والسكينة.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 2: Dedicated, Always-Active Student Message Box to Counselor -->
+    <div id="studentMessageSection" class="student-sub-section">
+      <div class="student-message-box" id="studentMessageBoxContainer">
+        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; border-bottom: 1px solid var(--slate-100); padding-bottom: 14px;">
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div style="width: 48px; height: 48px; border-radius: 14px; background: #ccfbf1; color: #0f766e; display: flex; align-items: center; justify-content: center; font-size: 24px;">💌</div>
+            <div>
+              <h3 style="font-size: 18px; font-weight: 800; color: var(--slate-900); margin: 0;">صندوق المصارحة والرسائل السرية للمرشد الطلابي</h3>
+              <p style="font-size: 12.5px; color: var(--slate-600); margin: 3px 0 0 0;">خاص بالمرشد الطلابي (أ. مازن السبايله) • استماع، دعم، وتوجيه آمن 100%</p>
+            </div>
+          </div>
+          <div style="background: #f0fdf4; border: 1px solid #86efac; color: #166534; padding: 6px 12px; border-radius: 20px; font-size: 11.5px; font-weight: 800; display: inline-flex; align-items: center; gap: 6px;">
+            <span>🔒</span> خصوصية مشفرة ومجهولة الهوية
+          </div>
+        </div>
+
+        <div id="studentMsgFormWrap">
+          <label style="font-size: 13px; font-weight: 700; color: var(--slate-800); display: block; margin-top: 10px;">حدد موضوع رسالتك (اختياري):</label>
+          <div class="message-category-chips">
+            <div class="category-chip selected" onclick="selectTicketCategory(this, 'استشارة دراسية واختبارات')">📚 استشارة دراسية واختبارات</div>
+            <div class="category-chip" onclick="selectTicketCategory(this, 'ضيق وقلق نفسي')">🌧️ ضيق وتوتر نفسي</div>
+            <div class="category-chip" onclick="selectTicketCategory(this, 'مشكلة أسرية أو شخصية')">🏡 مشكلة أسرية / شخصية</div>
+            <div class="category-chip" onclick="selectTicketCategory(this, 'مضايقة أو تنمر')">🛡️ مضايقة أو تنمر</div>
+            <div class="category-chip" onclick="selectTicketCategory(this, 'استفسار أو حديث عام')">💬 حديث واستشارة عامة</div>
+            <div class="category-chip" onclick="selectTicketCategory(this, 'أمر خاص ومستعجل')">⚡ أمر خاص ومستعجل</div>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 14px; margin-bottom: 6px;">
+            <label style="font-size: 13px; font-weight: 700; color: var(--slate-800); margin: 0;">نص رسالتك أو ما يدور في خاطرك:</label>
+            <span id="charCountSpan" style="font-size: 11px; color: var(--slate-500);">0 / 1000</span>
+          </div>
+          <textarea id="studentDirectMsg" class="note-input" maxlength="1000" oninput="updateCharCount(this)" style="min-height: 120px; margin-top: 0; font-size: 14.5px; line-height: 1.6;" placeholder="تحدث بكل أريحية عما تشعر به، أو ما يزعجك، أو ما ترغب بمشاركته... لن يقرأ أحد هذه الكلمات إلا المرشد فقط."></textarea>
+
+          <div style="background: #f8fafc; border: 1px solid var(--slate-200); border-radius: 12px; padding: 12px 14px; margin-top: 12px; margin-bottom: 12px;">
+            <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+              <label style="font-size: 12.5px; font-weight: 700; color: var(--slate-700); margin: 0;">الهوية ووسيلة التواصل:</label>
+              <div style="display: flex; gap: 6px;">
+                <button type="button" class="reason-chip selected" id="optAnon" onclick="toggleContactMode(true)" style="padding: 4px 10px; font-size: 11.5px;">🔒 مجهول الهوية 100%</button>
+                <button type="button" class="reason-chip" id="optNamed" onclick="toggleContactMode(false)" style="padding: 4px 10px; font-size: 11.5px;">👤 تحديد الاسم / الصف</button>
+              </div>
+            </div>
+            <div id="contactInputWrap" style="display: none; margin-top: 10px;">
+              <input type="text" id="studentDirectContact" class="modal-input" placeholder="اكتب اسمك، صفك، أو رقم الهاتف للتواصل معك..." style="margin-bottom: 0;" />
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-top: 16px;">
+            <button id="btnSubmitStudentTicket" class="submit-btn" style="margin-top: 0; flex: 2; min-width: 220px; background: linear-gradient(135deg, #0d9488 0%, #059669 100%); display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-size: 15.5px;" onclick="submitDirectTicket()">
+              <span>🕊️</span>
+              <span>إرسال الرسالة بسرية تامة للمرشد</span>
+            </button>
+            <button type="button" class="invite-btn" style="background: var(--slate-100); color: var(--slate-700); padding: 12px 16px; border-radius: 12px;" onclick="switchStudentSection('track')">
+              🔍 لدي كود سابق لمتابعته
+            </button>
+          </div>
+        </div>
+
+        <!-- Success Feedback Box -->
+        <div id="studentTicketSuccessCard" style="display: none; background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 16px; padding: 24px; text-align: center; margin-top: 14px;">
+          <div style="font-size: 42px; margin-bottom: 8px;">✨</div>
+          <h4 style="font-size: 18px; font-weight: 800; color: #166534; margin: 0 0 6px 0;">وصلت رسالتك بأمان تام للمرشد الطلابي</h4>
+          <p style="font-size: 13.5px; color: #1e3a8a; line-height: 1.6; margin: 0 auto 14px auto; max-width: 520px;">
+            كن مطمئناً، مشاعرك ورسالتك محل اهتمام ورعاية تامة. سيطلع عليها المرشد (أ. مازن السبايله) شخصياً لتقديم الدعم والعون لك.
+          </p>
+          <div style="background: white; border: 1.5px dashed #059669; padding: 12px 20px; border-radius: 14px; display: inline-block; margin-bottom: 16px; box-shadow: 0 4px 12px rgba(5,150,105,0.06);">
+            <div style="font-size: 12px; color: var(--slate-600); margin-bottom: 4px;">احتفظ بكود المتابعة السري للاطلاع على رد المرشد:</div>
+            <div style="display: flex; align-items: center; justify-content: center; gap: 8px;">
+              <strong id="createdTicketCode" style="font-size: 20px; color: #0d9488; font-family: monospace; letter-spacing: 1px;">TKT-0000</strong>
+              <button class="invite-btn" style="padding: 4px 8px; font-size: 11px; background: #ccfbf1; color: #0f766e;" onclick="copyTicketCode()">
+                📋 نسخ الكود
+              </button>
+            </div>
+          </div>
+          <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+            <button class="invite-btn" style="background: var(--primary); color: white; padding: 10px 20px; font-size: 13.5px;" onclick="trackCurrentTicket()">
+              🔍 متابعة رد وتوجيه المرشد الآن
+            </button>
+            <button class="invite-btn" style="background: white; color: var(--slate-700); border: 1px solid var(--slate-300); padding: 10px 18px; font-size: 13.5px;" onclick="resetStudentMsgForm()">
+              ✍️ كتابة رسالة أخرى
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 3: Track Ticket & Counselor Reply -->
+    <div id="studentTrackSection" class="student-sub-section">
+      <div class="track-ticket-card">
+        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 14px; border-bottom: 1px solid var(--slate-100); padding-bottom: 14px;">
+          <div style="width: 46px; height: 46px; border-radius: 14px; background: #e0f2fe; color: #0369a1; display: flex; align-items: center; justify-content: center; font-size: 22px;">🔍</div>
+          <div>
+            <h3 style="font-size: 18px; font-weight: 800; color: var(--slate-900); margin: 0;">متابعة رد وتوجيه المرشد الطلابي</h3>
+            <p style="font-size: 12.5px; color: var(--slate-600); margin: 3px 0 0 0;">أدخل كود المتابعة السري الذي حصلت عليه عند إرسال رسالتك</p>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 16px;">
+          <input type="text" id="trackCodeInput" class="modal-input" placeholder="مثال: TKT-1234" style="flex: 2; min-width: 200px; margin-bottom: 0; text-transform: uppercase; font-family: monospace; font-size: 16px; font-weight: 700;" />
+          <button class="submit-btn" style="margin-top: 0; flex: 1; min-width: 140px; background: var(--primary);" onclick="performTrackTicket()">
+            🔍 استعلام عن الرد
+          </button>
+        </div>
+
+        <div id="trackErrorMsg" style="display: none; background: #fee2e2; color: #dc2626; padding: 12px; border-radius: 12px; font-size: 13px; font-weight: 700; margin-bottom: 14px;"></div>
+
+        <!-- Track Result Display Container -->
+        <div id="trackResultBox" style="display: none; background: #f8fafc; border: 1.5px solid var(--slate-200); border-radius: 16px; padding: 20px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 12px;">
+            <div>
+              <span style="font-size: 12px; color: var(--slate-500);">كود التذكرة:</span>
+              <strong id="trackResultCode" style="font-family: monospace; font-size: 16px; color: var(--primary); margin-right: 6px;"></strong>
+              <span id="trackResultCategory" style="font-size: 12px; background: white; border: 1px solid var(--slate-200); padding: 3px 8px; border-radius: 6px; margin-right: 8px;"></span>
+            </div>
+            <div id="trackResultStatus"></div>
+          </div>
+
+          <div style="font-size: 12px; color: var(--slate-500); margin-bottom: 14px;">
+            تاريخ الإرسال: <span id="trackResultDate" style="color: var(--slate-700); font-weight: 600;"></span>
+          </div>
+
+          <!-- Counselor Reply Section -->
+          <div id="trackReplyContent">
+            <!-- Populated dynamically via JS -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Counselor Dashboard (Hidden from Public, Revealed Only After Authenticated Login) -->
+  <main id="counselorDashboardView" class="counselor-dashboard-view">
+    <!-- Executive Top Header -->
+    <div class="dashboard-header">
+      <div>
+        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+          <h2 style="font-size: 22px; font-weight: 800; color: var(--slate-900); margin: 0;">مركز إدارة منصة طمأنينة</h2>
+          <span style="background: #f0fdf4; color: #166534; border: 1px solid #86efac; padding: 2px 8px; border-radius: 12px; font-size: 11px; font-weight: 800;">● متصل وآمن</span>
+        </div>
+        <p style="font-size: 13px; color: var(--slate-600); margin: 0;" id="adminWelcomeText">
+          المشرف العام: أ. مازن السبايله • كامل الصلاحيات الإدارية والسرية
+        </p>
+      </div>
+
+      <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
+        <button class="invite-btn" style="background: #e0f2fe; color: #0369a1; border: 1px solid #bae6fd; display: inline-flex; align-items: center; gap: 4px;" onclick="refreshDashboardData()">
+          <span>🔄</span>
+          <span>تحديث لحظي</span>
+        </button>
+        <button class="invite-btn" style="background: #f1f5f9; color: var(--slate-700); border: 1px solid var(--slate-300);" onclick="logoutCounselor()">
+          👁️ معاينة واجهة الطلاب
+        </button>
+        <button class="invite-btn" style="background: #fee2e2; color: #dc2626; border: 1px solid #fecaca;" onclick="logoutCounselor()">
+          🚪 تسجيل خروج
+        </button>
+      </div>
+    </div>
+
+    <!-- Executive Tab Navigation Bar -->
+    <div class="dashboard-tabs">
+      <button class="dash-tab-btn active" id="tabBtnAnalytics" onclick="switchAdminTab('analytics')">
+        <span>📊</span>
+        <span>المؤشرات والتحليلات البيانية</span>
+      </button>
+      <button class="dash-tab-btn" id="tabBtnTickets" onclick="switchAdminTab('tickets')">
+        <span>📩</span>
+        <span>صندوق الرسائل السرية</span>
+        <span class="dash-tab-badge" id="ticketsBadgeCount">0</span>
+      </button>
+      <button class="dash-tab-btn" id="tabBtnTeam" onclick="switchAdminTab('team')">
+        <span>👥</span>
+        <span>فريق العمل والصلاحيات</span>
+      </button>
+      <button class="dash-tab-btn" id="tabBtnPulses" onclick="switchAdminTab('pulses')">
+        <span>📝</span>
+        <span>سجل استجابات الطلاب</span>
+      </button>
+      <button class="dash-tab-btn" id="tabBtnTools" onclick="switchAdminTab('tools')">
+        <span>⚙️</span>
+        <span>النسخ الاحتياطي والبيانات</span>
+      </button>
+    </div>
+
+    <!-- TAB 1: Analytics & KPIs -->
+    <div id="tabPaneAnalytics" class="admin-tab-pane active">
+      <!-- Time Filter -->
+      <div class="time-filter-wrap">
+        <span style="font-size: 13px; font-weight: 700; color: var(--slate-700);">⏱️ نطاق التحليل:</span>
+        <button class="reason-chip selected" onclick="filterTime('TODAY', this)">اليوم</button>
+        <button class="reason-chip" onclick="filterTime('WEEK', this)">7 أيام</button>
+        <button class="reason-chip" onclick="filterTime('MONTH', this)">30 يوماً</button>
+        <button class="reason-chip" onclick="filterTime('ALL', this)">الكل</button>
+      </div>
+
+      <!-- KPI Stats -->
+      <div class="dashboard-grid">
+        <div class="stat-card">
+          <span style="font-size: 12px; color: var(--slate-600); font-weight: 600;">إجمالي نبضات الطلاب</span>
+          <div class="stat-value" id="statTotal">0</div>
+          <span style="font-size: 11px; color: var(--emerald); font-weight: 700;">● نبضات تفاعلية حية</span>
+        </div>
+
+        <div class="stat-card">
+          <span style="font-size: 12px; color: var(--slate-600); font-weight: 600;">مؤشر الاستقرار الإيجابي</span>
+          <div class="stat-value" id="statRate" style="color: var(--emerald);">100%</div>
+          <span style="font-size: 11px; color: var(--slate-600);">الفرح، الهدوء، والملل العادي</span>
+        </div>
+
+        <div class="stat-card">
+          <span style="font-size: 12px; color: var(--slate-600); font-weight: 600;">الشعور السائد في المدرسة</span>
+          <div class="stat-value" id="statDominant" style="font-size: 24px; color: var(--primary);">الهدوء 🌿</div>
+          <span style="font-size: 11px; color: var(--primary); font-weight: 600;">تحليل آلي للبيانات</span>
+        </div>
+
+        <div class="stat-card">
+          <span style="font-size: 12px; color: var(--slate-600); font-weight: 600;">طلبات الدعم والاستشارة</span>
+          <div class="stat-value" id="statTicketsTotal" style="color: #0284c7;">0</div>
+          <span style="font-size: 11px; color: #0284c7; font-weight: 600;">رسائل سرية خاصة</span>
+        </div>
+      </div>
+
+      <!-- Interactive Visual Analytics (Chart.js) -->
+      <div class="stat-card" style="margin-bottom: 24px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 16px;">
+          <div>
+            <h3 style="font-size: 18px; font-weight: 800; color: var(--slate-900);">
+              📊 التحليل البياني التفاعلي لاتجاهات المشاعر
+            </h3>
+            <p style="font-size: 12px; color: var(--slate-600);">رسم بياني زمني وتوزيعي لتطور الحالة المزاجية لطلاب المدرسة</p>
+          </div>
+          <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+            <button class="reason-chip selected" id="btnChartTimeline" onclick="setChartType('timeline')">📈 المسار الزمني</button>
+            <button class="reason-chip" id="btnChartDoughnut" onclick="setChartType('doughnut')">🍩 توزيع النسب</button>
+            <button class="reason-chip" id="btnChartBar" onclick="setChartType('bar')">📊 أعمدة المشاعر</button>
+          </div>
+        </div>
+        <div style="position: relative; width: 100%; height: 320px;">
+          <canvas id="emotionsChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Proposed Guidance Initiatives -->
+      <div class="stat-card" style="margin-bottom: 24px;">
+        <h3 style="font-size: 18px; font-weight: 800; color: var(--slate-900); margin-bottom: 8px;">
+          💡 خطة المبادرات التربوية المقترحة
+        </h3>
+        <div id="initiativesBox"></div>
+      </div>
+    </div>
+
+    <!-- TAB 2: Confidential Support Tickets -->
+    <div id="tabPaneTickets" class="admin-tab-pane">
+      <div id="ticketsRestrictedBanner" style="display: none; background: #0f172a; color: white; border-radius: 16px; padding: 26px; text-align: center; border: 1.5px solid #dc2626; margin-bottom: 20px;">
+        <div style="font-size: 40px; margin-bottom: 8px;">🔒</div>
+        <h4 style="font-size: 17px; font-weight: 800; margin-bottom: 8px; color: #f87171;">صلاحية مقيدة • سرية تامة ومحمية</h4>
+        <p style="font-size: 13.5px; color: #cbd5e1; max-width: 620px; margin: 0 auto; line-height: 1.7;">
+          الرسائل السرية وتذاكر الدعم والاستشارة مقتصرة حصرياً على المشرف العام (أ. مازن السبايله) لحماية خصوصية الطلاب وسرية بياناتهم التامة وفق اللائحة الإرشادية المعتمدة.<br>
+          <span style="color: #2dd4bf; font-weight: 700; display: inline-block; margin-top: 6px;">
+            ● صلاحيتك الحالية كعضو فريق عمل: الاطلاع والتحليل على نبضات واستجابات المشاعر العامة فقط.
+          </span>
+        </p>
+      </div>
+
+      <div id="ticketsAuthorizedContent" class="stat-card">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px; margin-bottom: 16px; border-bottom: 1px solid var(--slate-100); padding-bottom: 14px;">
+          <div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <h3 style="font-size: 18px; font-weight: 800; color: var(--slate-900); margin: 0;">
+                📩 صندوق الرسائل وتذاكر الدعم السرية
+              </h3>
+              <span id="ticketHeaderCountBadge" style="background: #e0f2fe; color: #0369a1; font-size: 12px; font-weight: 800; padding: 2px 10px; border-radius: 20px;">0 تذكرة</span>
+            </div>
+            <p style="font-size: 12px; color: var(--slate-600); margin: 3px 0 0 0;">خاصة بالمشرف العام أ. مازن السبايله • استقبال، متابعة، وتوجيه إرشادي مباشر</p>
+          </div>
+
+          <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
+            <input type="text" id="ticketSearchInput" oninput="renderTickets()" placeholder="🔍 بحث بكود التذكرة أو الكلمات..." class="modal-input" style="width: 220px; margin: 0; padding: 7px 12px; font-size: 12.5px; height: 38px;" />
+            <div style="display: flex; gap: 4px;">
+              <button class="reason-chip selected" id="filterTicketAll" onclick="filterTicketsByStatus('ALL', this)">الكل</button>
+              <button class="reason-chip" id="filterTicketNew" onclick="filterTicketsByStatus('NEW', this)">🟡 جديد</button>
+              <button class="reason-chip" id="filterTicketProg" onclick="filterTicketsByStatus('IN_PROGRESS', this)">🔵 قيد المتابعة</button>
+              <button class="reason-chip" id="filterTicketDone" onclick="filterTicketsByStatus('RESOLVED', this)">🟢 تم الدعم</button>
+            </div>
+          </div>
+        </div>
+
+        <div style="overflow-x: auto;">
+          <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+            <thead>
+              <tr style="background: var(--slate-100); text-align: right;">
+                <th style="padding: 10px;">كود التذكرة</th>
+                <th style="padding: 10px;">الموضوع / التصنيف</th>
+                <th style="padding: 10px;">نص الرسالة السرية</th>
+                <th style="padding: 10px;">وسيلة التواصل</th>
+                <th style="padding: 10px;">التاريخ والوقت</th>
+                <th style="padding: 10px;">الحالة</th>
+                <th style="padding: 10px; text-align: center;">الإجراءات والتوجيه</th>
+              </tr>
+            </thead>
+            <tbody id="ticketsBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 3: Team Members Management -->
+    <div id="tabPaneTeam" class="admin-tab-pane">
+      <div class="stat-card" style="margin-bottom: 24px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 14px;">
+          <div>
+            <h3 style="font-size: 18px; font-weight: 800; color: var(--slate-900); margin: 0 0 4px 0;">
+              👥 فريق العمل ومتابعة الاستجابات
+            </h3>
+            <p style="font-size: 12px; color: var(--slate-600); margin: 0;">
+              صلاحية الفريق: الاطلاع والتحليل على نبضات واستجابات المشاعر العامة فقط (محظورون من الرسائل وتذاكر الدعم السرية)
+            </p>
+          </div>
+          <button class="invite-btn" id="btnAddMemberBtn" style="background: var(--primary); color: white; font-weight: 700; padding: 8px 16px; border-radius: 10px; display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 2px 6px rgba(13,148,136,0.3);" onclick="openAddMemberModal()">
+            ➕ إضافة عضو جديد باستخدام الإيميل
+          </button>
+        </div>
+
+        <div style="background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%); border: 1.5px solid #6ee7b7; border-radius: 12px; padding: 12px 16px; margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span style="font-size: 24px;">👑</span>
+            <div>
+              <strong style="color: #065f46; font-size: 13.5px; display: block;">صلاحيات المشرف العام (أ. مازن السبايله) مفعلة بالكامل</strong>
+              <span style="color: #047857; font-size: 11.5px;">تتمتع بصلاحية مطلقة لإضافة أعضاء جدد بالإيميل أو حذف أي عضو من فريق الدعم مباشرة عبر زر الحذف أدناه.</span>
+            </div>
+          </div>
+          <span style="background: #059669; color: white; padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 800;">⚡ تحكم كامل مفعل</span>
+        </div>
+
+        <div style="overflow-x: auto;">
+          <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+            <thead>
+              <tr style="background: var(--slate-100); text-align: right;">
+                <th style="padding: 10px;">الاسم</th>
+                <th style="padding: 10px;">البريد الإلكتروني</th>
+                <th style="padding: 10px;">الدور</th>
+                <th style="padding: 10px;">الصلاحية المعطاة</th>
+                <th style="padding: 10px; text-align: center;">الإجراء</th>
+              </tr>
+            </thead>
+            <tbody id="teamMembersBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 4: Student Pulse Log -->
+    <div id="tabPanePulses" class="admin-tab-pane">
+      <div class="stat-card">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 16px;">
+          <div>
+            <h3 style="font-size: 18px; font-weight: 800; color: var(--slate-900); margin: 0 0 4px 0;">
+              📝 سجل نبضات واستجابات الطلاب اللحظية
+            </h3>
+            <p style="font-size: 12px; color: var(--slate-600); margin: 0;">عرض تسلسلي مباشر لجميع النبضات المسجلة مع تفريغ المشاعر</p>
+          </div>
+          <div style="display: flex; gap: 8px; align-items: center;">
+            <span style="font-size: 12px; font-weight: 700; color: var(--slate-700);">تصفية بالشعور:</span>
+            <select id="pulseEmotionFilter" class="modal-input" style="height: 38px; width: 140px; margin: 0; padding: 6px 10px; font-size: 12px;" onchange="renderPulsesLog()">
+              <option value="ALL">جميع المشاعر</option>
+              <option value="JOY">😊 الفرح</option>
+              <option value="CALM">🌿 الهدوء</option>
+              <option value="SAD">🌧️ الحزن</option>
+              <option value="ANXIOUS">⚡ القلق</option>
+              <option value="EXHAUSTED">🔋 الإرهاق</option>
+              <option value="BORED">⏳ الملل</option>
+              <option value="ANGRY">🔥 الغضب</option>
+              <option value="FEAR">🛡️ الخوف</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="overflow-x: auto;">
+          <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+            <thead>
+              <tr style="background: var(--slate-100); text-align: right;">
+                <th style="padding: 10px;">الحالة النفسية</th>
+                <th style="padding: 10px;">السبب المرتبط</th>
+                <th style="padding: 10px;">تفريغ الطالب (الكلمات السرية)</th>
+                <th style="padding: 10px;">التاريخ والوقت</th>
+              </tr>
+            </thead>
+            <tbody id="pulsesLogBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 5: Backup & Data Tools -->
+    <div id="tabPaneTools" class="admin-tab-pane">
+      <div class="stat-card">
+        <h3 style="font-size: 18px; font-weight: 800; color: var(--slate-900); margin-bottom: 6px;">
+          ⚙️ أدوات النسخ الاحتياطي وإدارة البيانات
+        </h3>
+        <p style="font-size: 12px; color: var(--slate-600); margin-bottom: 18px;">
+          أدوات تصدير وحفظ واسترجاع بيانات المدرسة لضمان أمان السجلات وإعداد التقارير الإرشادية
+        </p>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px;">
+          <div style="border: 1px solid var(--slate-200); border-radius: 14px; padding: 16px; background: #f8fafc;">
+            <div style="font-size: 24px; margin-bottom: 6px;">📊</div>
+            <h4 style="font-size: 15px; font-weight: 700; margin: 0 0 6px 0;">تصدير سجلات CSV</h4>
+            <p style="font-size: 12px; color: var(--slate-600); margin-bottom: 12px;">تحميل ملف متوافق مع Excel للتحليل الإحصائي والإرشادي.</p>
+            <button class="invite-btn" style="background: var(--primary); color: white; width: 100%;" onclick="downloadCsv()">
+              💾 تحميل ملف CSV
+            </button>
+          </div>
+
+          <div style="border: 1px solid var(--slate-200); border-radius: 14px; padding: 16px; background: #f8fafc;">
+            <div style="font-size: 24px; margin-bottom: 6px;">📦</div>
+            <h4 style="font-size: 15px; font-weight: 700; margin: 0 0 6px 0;">نسخة احتياطية كاملة (JSON)</h4>
+            <p style="font-size: 12px; color: var(--slate-600); margin-bottom: 12px;">تصدير كافة النبضات والتذاكر وأعضاء الفريق في ملف آمن.</p>
+            <button class="invite-btn" style="background: var(--slate-700); color: white; width: 100%;" onclick="exportJsonBackup()">
+              📦 تصدير ملف النسخة
+            </button>
+          </div>
+
+          <div style="border: 1px solid var(--slate-200); border-radius: 14px; padding: 16px; background: #f8fafc;">
+            <div style="font-size: 24px; margin-bottom: 6px;">🔄</div>
+            <h4 style="font-size: 15px; font-weight: 700; margin: 0 0 6px 0;">استرجاع نسخة سابقة</h4>
+            <p style="font-size: 12px; color: var(--slate-600); margin-bottom: 12px;">استعادة قاعدة البيانات من ملف JSON تم حفظه مسبقاً.</p>
+            <button class="invite-btn" style="background: var(--teal); color: white; width: 100%;" onclick="document.getElementById('restoreFileInput').click()">
+              🔄 استرجاع من ملف
+            </button>
+            <input type="file" id="restoreFileInput" accept=".json" style="display:none;" onchange="importJsonBackup(this)" />
+          </div>
+
+          <div style="border: 1px solid #fecaca; border-radius: 14px; padding: 16px; background: #fff5f5;">
+            <div style="font-size: 24px; margin-bottom: 6px;">🗑️</div>
+            <h4 style="font-size: 15px; font-weight: 700; color: #dc2626; margin: 0 0 6px 0;">تصفير ومسح السجلات</h4>
+            <p style="font-size: 12px; color: var(--slate-600); margin-bottom: 12px;">مسح كافة نبضات الطلاب السابقة لبدء فصل دراسي جديد.</p>
+            <button class="invite-btn" style="background: #fee2e2; color: #dc2626; width: 100%; border: 1px solid #f87171;" onclick="wipeData()">
+              🗑️ مسح السجلات
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Clean Footer with Requested Tagline -->
+  <footer>
+    <p class="footer-tagline">منصة طمأنينة المدرسية © 2026 • بيئة آمنة لحماية مشاعر واستقرار الطلاب والمجتمع المحلي</p>
+    <div style="margin-top: 6px;">
+      <span class="discreet-counselor-link" onclick="openCounselorLogin()">🔒 بوابة المرشد والإدارة</span>
+    </div>
+  </footer>
+
+  <!-- Discreet Support Ticket Modal -->
+  <div id="ticketModal" class="modal-overlay" style="display: none;">
+    <div class="modal-content">
+      <h3>طلب استشارة ودعم سري</h3>
+      <p>رسالتك تصل مباشرة للمرشد الطلابي فقط دون مشاركتها مع أي جهة.</p>
+
+      <label style="font-size: 13px; font-weight: 700; display: block; margin-bottom: 4px;">رسالتك:</label>
+      <textarea id="ticketMsg" class="modal-input" placeholder="اكتب ما تشعر به أو ما تحتاجه بحرية..." style="min-height: 90px;"></textarea>
+
+      <label style="font-size: 13px; font-weight: 700; display: block; margin-bottom: 4px;">الاسم أو وسيلة التواصل (اختياري تماماً):</label>
+      <input type="text" id="ticketContact" class="modal-input" placeholder="اتركه فارغاً إن رغبت بالسرية التامة 100%" />
+
+      <div style="display: flex; gap: 10px; margin-top: 8px;">
+        <button class="submit-btn" style="margin-top: 0; flex: 1;" onclick="sendTicket()">إرسال للمرشد</button>
+        <button class="submit-btn" style="margin-top: 0; background: var(--slate-100); color: var(--slate-700); box-shadow: none;" onclick="closeTicketModal()">إلغاء</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Discreet Counselor Login Modal - ZERO EXPOSED CREDENTIALS -->
+  <div id="counselorModal" class="modal-overlay" style="display: none;">
+    <div class="modal-content">
+      <h3>لوحة تحكم المرشد والمشرف</h3>
+      <p>تسجيل دخول المشرف العام وأعضاء فريق التوجيه الطلابي</p>
+
+      <div id="loginErrorMsg" style="display: none; background: #fee2e2; color: #dc2626; padding: 10px; border-radius: 10px; font-size: 12px; font-weight: 700; margin-bottom: 12px;"></div>
+
+      <label style="font-size: 13px; font-weight: 700; display: block; margin-bottom: 4px;">البريد الإلكتروني المعتمد:</label>
+      <input type="email" id="loginEmail" class="modal-input" placeholder="أدخل البريد الإلكتروني الخاص بالإدارة..." value="" autocomplete="username" />
+
+      <label style="font-size: 13px; font-weight: 700; display: block; margin-bottom: 4px;">كلمة المرور:</label>
+      <input type="password" id="loginPass" class="modal-input" placeholder="أدخل كلمة المرور السرية..." value="" autocomplete="current-password" />
+
+      <div style="display: flex; gap: 10px; margin-top: 8px;">
+        <button id="loginBtn" class="submit-btn" style="margin-top: 0; flex: 1;" onclick="handleCounselorLogin()">دخول لوحة التحكم</button>
+        <button class="submit-btn" style="margin-top: 0; background: var(--slate-100); color: var(--slate-700); box-shadow: none;" onclick="closeCounselorModal()">إلغاء</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add Team Member Modal -->
+  <div id="addMemberModal" class="modal-overlay" style="display: none;">
+    <div class="modal-content">
+      <h3>إضافة عضو جديد باستخدام الإيميل</h3>
+      <p>يمنح هذا الإجراء العضو صلاحية متابعة وتحليل نبضات الطلاب ومؤشرات المدرسة مع حظر الرسائل وتذاكر الدعم السرية.</p>
+
+      <div id="addMemberError" style="display: none; background: #fee2e2; color: #dc2626; padding: 10px; border-radius: 10px; font-size: 12px; font-weight: 700; margin-bottom: 12px;"></div>
+
+      <label style="font-size: 13px; font-weight: 700; display: block; margin-top: 10px; margin-bottom: 4px;">الاسم الكامل:</label>
+      <input type="text" id="newMemberName" class="modal-input" placeholder="مثال: أ. عبد الله الغامدي" />
+
+      <label style="font-size: 13px; font-weight: 700; display: block; margin-top: 10px; margin-bottom: 4px;">البريد الإلكتروني المعتمد (Email):</label>
+      <input type="email" id="newMemberEmail" class="modal-input" placeholder="example@school.edu.sa" />
+      <span style="font-size: 11px; color: var(--slate-600); display: block; margin-top: -6px; margin-bottom: 8px;">يجب إدخال بريد إلكتروني صحيح لتسجيل العضو وتفعيل دخوله.</span>
+
+      <label style="font-size: 13px; font-weight: 700; display: block; margin-top: 6px; margin-bottom: 4px;">الدور الوظيفي:</label>
+      <select id="newMemberRole" class="modal-input" style="height: 44px;">
+        <option value="عضو فريق - متابع استجابات">عضو فريق - متابع استجابات</option>
+        <option value="وكيل المدرسة لشؤون الطلاب">وكيل المدرسة لشؤون الطلاب</option>
+        <option value="مرشد طلابي مساعد">مرشد طلابي مساعد</option>
+        <option value="أخصائي إرشاد نفسي">أخصائي إرشاد نفسي</option>
+        <option value="محلل بيانات توجيه">محلل بيانات توجيه</option>
+      </select>
+
+      <div style="background: var(--slate-100); border-radius: 12px; padding: 12px; margin-top: 12px;">
+        <span style="font-size: 12px; font-weight: 700; color: var(--slate-800); display: block;">🔒 نطاق الصلاحية الممنوحة:</span>
+        <span style="font-size: 11px; color: var(--slate-600); display: block; margin-top: 4px;">
+          الاطلاع على لوحة النبض، المؤشرات العامة، الرسوم البيانية، وخطة المبادرات المقترحة. الرسائل السرية وتذاكر الدعم محظورة تماماً ومقتصرة على المشرف العام (أ. مازن السبايله).
+        </span>
+      </div>
+
+      <div style="display: flex; gap: 10px; margin-top: 16px;">
+        <button id="btnSaveMember" class="submit-btn" style="margin-top: 0; flex: 1;" onclick="saveNewTeamMember()">💾 حفظ وإضافة العضو الآن</button>
+        <button class="submit-btn" style="margin-top: 0; background: var(--slate-200); color: var(--slate-800); flex: 1;" onclick="closeAddMemberModal()">إلغاء</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Counselor Reply & Guidance Modal -->
+  <div id="counselorReplyModal" class="modal-overlay" style="display: none;">
+    <div class="modal-content" style="max-width: 560px;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px solid var(--slate-100); padding-bottom: 10px;">
+        <h3 style="margin: 0; font-size: 19px; font-weight: 800; color: var(--slate-900);">
+          ✍️ الرد والتوجيه الإرشادي للطالب
+        </h3>
+        <span id="replyModalTicketCode" style="font-family: monospace; font-size: 15px; font-weight: 800; color: var(--primary); background: var(--primary-bg); padding: 4px 10px; border-radius: 8px;"></span>
+      </div>
+
+      <div style="background: #f8fafc; border: 1px solid var(--slate-200); border-radius: 14px; padding: 14px; margin-bottom: 14px;">
+        <div style="display: flex; justify-content: space-between; font-size: 12px; color: var(--slate-600); margin-bottom: 6px;">
+          <span id="replyModalCategory" style="font-weight: 700; color: var(--slate-800);"></span>
+          <span id="replyModalDate" style="color: var(--slate-500);"></span>
+        </div>
+        <div style="font-size: 12px; color: var(--slate-500); margin-bottom: 6px;">
+          المرسل: <strong id="replyModalContact" style="color: var(--slate-800);"></strong>
+        </div>
+        <div style="font-size: 13.5px; line-height: 1.6; color: var(--slate-900); background: white; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--slate-200); max-height: 120px; overflow-y: auto;" id="replyModalMessage">
+        </div>
+      </div>
+
+      <div id="replyModalError" style="display: none; background: #fee2e2; color: #dc2626; padding: 10px; border-radius: 10px; font-size: 12px; font-weight: 700; margin-bottom: 12px;"></div>
+
+      <label style="font-size: 13px; font-weight: 700; color: var(--slate-800); display: block; margin-bottom: 6px;">
+        نص رد وتوجيه المرشد الطلابي (أ. مازن السبايله):
+      </label>
+      <textarea id="counselorReplyText" class="modal-input" placeholder="اكتب كلمات الدعم، التوجيه، أو موعد المقابلة الإرشادية هنا... ستظهر للطالب بسرية تامة عند استعلامه بكود التذكرة." style="min-height: 110px; font-size: 14px; line-height: 1.6;"></textarea>
+
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; flex-wrap: wrap; gap: 8px;">
+        <label style="font-size: 12.5px; font-weight: 700; color: var(--slate-700);">تحديث حالة التذكرة:</label>
+        <select id="replyModalStatus" class="modal-input" style="width: 170px; margin: 0; padding: 6px 10px; font-size: 12.5px; height: 38px;">
+          <option value="RESOLVED">🟢 تم الدعم والإغلاق</option>
+          <option value="IN_PROGRESS">🔵 قيد المتابعة والتوجيه</option>
+        </select>
+      </div>
+
+      <div style="display: flex; gap: 10px;">
+        <button id="btnSendCounselorReply" class="submit-btn" style="margin-top: 0; flex: 2; background: linear-gradient(135deg, #0d9488 0%, #059669 100%);" onclick="saveCounselorReply()">
+          💾 إرسال الرد وحفظ التوجيه
+        </button>
+        <button class="submit-btn" style="margin-top: 0; background: var(--slate-100); color: var(--slate-700); flex: 1; box-shadow: none;" onclick="closeCounselorReplyModal()">
+          إلغاء
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // --- Structured Client Logger ---
+    const clientLog = {
+      info: (msg, data = {}) => console.log(`[CLIENT-INFO] ${msg}`, data),
+      warn: (msg, data = {}) => console.warn(`[CLIENT-WARN] ${msg}`, data),
+      error: (msg, err = {}) => console.error(`[CLIENT-ERROR] ${msg}`, err)
+    };
+
+    // Safe Storage Wrappers preventing JSON parsing and quota crashes
+    function safeGetStorage(key, fallback = []) {
+      try {
+        const raw = localStorage.getItem(key);
+        if (!raw) return fallback;
+        const parsed = JSON.parse(raw);
+        return Array.isArray(fallback) && !Array.isArray(parsed) ? fallback : parsed;
+      } catch (err) {
+        clientLog.error('Failed to parse localStorage key: ' + key, err);
+        return fallback;
+      }
+    }
+
+    function safeSetStorage(key, value) {
+      try {
+        localStorage.setItem(key, JSON.stringify(value));
+        return true;
+      } catch (err) {
+        clientLog.error('Quota exceeded or error writing to localStorage for key: ' + key, err);
+        alert('تنبيه: مساحة التخزين في المتصفح ممتلئة. يرجى تنظيف الذاكرة أو مراجعة المشرف.');
+        return false;
+      }
+    }
+
+    let selectedEmotionData = null;
+    let selectedReasonText = '';
+    let currentTimeFilter = 'TODAY';
+    let isCounselorAuthenticated = false;
+
+    const supportMessages = {
+      JOY: "رائع جداً! استمتع بلحظتك الإيجابية وشارك هذا النور والابتسامة مع زملائك. طاقتك مصدر إلهام لكل من حولك.",
+      CALM: "الهدوء قوة وسكينة ثمينة. هذا التوازن يساعدك على التركيز والإبداع وتجاوز يومك الدراسي بنقاء ويسر.",
+      SAD: "من الطبيعي جداً أن نشعر بالحزن أحياناً. أنت لست وحدك، ومشاعرك مقدرة ولها مساحة آمنة لتمر بسلام.",
+      ANXIOUS: "توقف لبرهة وتنفس بعمق.. معظم ما نخشاه يمر بسلام. جرب تمرين التنفس المهدئ الآن لاستعادة ثباتك واطمئنانك.",
+      EXHAUSTED: "جسدك وعقلك يطلبان استراحة مستحقة. امنح نفسك قسطاً من الراحة والنوم، فالإنجاز الحقيقي يبدأ بصحتك.",
+      BORED: "الملل أحياناً بداية الشرارة لاكتشاف شيء جديد وشغف مختلف. ابحث عن فكرة صغيرة تكسر روتين يومك.",
+      ANGRY: "غضبك مؤشر على أنك تهتم أو تشعر بالضيق. خذ نفساً عميقاً حتى تهدأ العاصفة، لتتخذ القرار الأفضل بحكمة وهدوء.",
+      FEAR: "الشجاعة ليست غياب الخوف، بل مواجهته بلطف. المدرسة بيئة أمان، ومرشدوك هنا لمساندتك دائماً."
+    };
+
+    function selectEmotion(code, emoji, title, desc, cardEl) {
+      selectedEmotionData = { code, emoji, title, desc };
+      document.querySelectorAll('.emotion-card').forEach(c => c.classList.remove('selected'));
+      cardEl.classList.add('selected');
+
+      const reasonsSec = document.getElementById('reasonsSection');
+      reasonsSec.style.display = 'block';
+      reasonsSec.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function toggleReason(chipEl, reasonText) {
+      document.querySelectorAll('.reason-chip').forEach(c => c.classList.remove('selected'));
+      chipEl.classList.add('selected');
+      selectedReasonText = reasonText;
+    }
+
+    function submitPulse() {
+      if (!selectedEmotionData) {
+        alert('يرجى اختيار حالتك النفسية من البطاقات أولاً.');
+        return;
+      }
+      const note = document.getElementById('optionalNote').value.trim();
+
+      const records = safeGetStorage('tomanina_records', []);
+      records.unshift({
+        id: Date.now(),
+        emotion: selectedEmotionData.code,
+        reason: selectedReasonText || 'شعور عام',
+        note: note,
+        timestamp: Date.now()
+      });
+      safeSetStorage('tomanina_records', records);
+      clientLog.info('Pulse submitted successfully', { emotion: selectedEmotionData.code });
+
+      document.getElementById('reassuranceTitle').innerText = `✨ رسالة طمأنينة لمشاعر «${selectedEmotionData.title}»`;
+      document.getElementById('reassuranceText').innerText = supportMessages[selectedEmotionData.code] || supportMessages.CALM;
+
+      const rBox = document.getElementById('reassuranceBox');
+      rBox.style.display = 'block';
+      rBox.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Defensive Security Utility Functions: XSS prevention & CSV Formula Injection sanitization
+    function escapeHtml(str) {
+      if (str === null || str === undefined) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    function sanitizeForCsv(val) {
+      if (val === null || val === undefined) return '';
+      let s = String(val).replace(/"/g, '""');
+      // Neutralize CSV / Spreadsheet Formula Injection (CWE-1236)
+      if (/^[=+\-@\t\r]/.test(s)) {
+        s = "'" + s;
+      }
+      return s;
+    }
+
+    async function openCounselorLogin() {
+      const token = sessionStorage.getItem('tmn_session');
+      if (token) {
+        try {
+          const res = await fetch('/api/counselor/verify', {
+            headers: { 'Authorization': `Bearer ${token}` }
+          });
+          const data = await res.json();
+          if (res.ok && data.valid) {
+            isCounselorAuthenticated = true;
+            showDashboard('أ. مازن السبايله');
+            return;
+          }
+        } catch (_) {}
+      }
+      isCounselorAuthenticated = false;
+      sessionStorage.removeItem('tmn_session');
+      document.getElementById('loginErrorMsg').style.display = 'none';
+      document.getElementById('loginEmail').value = '';
+      document.getElementById('loginPass').value = '';
+      document.getElementById('counselorModal').style.display = 'flex';
+    }
+    function closeCounselorModal() { document.getElementById('counselorModal').style.display = 'none'; }
+
+    function openTicketModal() {
+      document.getElementById('ticketMsg').value = '';
+      document.getElementById('ticketContact').value = '';
+      document.getElementById('ticketModal').style.display = 'flex';
+      setTimeout(() => document.getElementById('ticketMsg').focus(), 100);
+    }
+    function closeTicketModal() {
+      document.getElementById('ticketModal').style.display = 'none';
+    }
+
+    let currentTicketCategory = 'استشارة دراسية واختبارات';
+    let isAnonymousContact = true;
+
+    function switchStudentSection(sec) {
+      const sections = ['pulse', 'message', 'track'];
+      sections.forEach(s => {
+        const btn = document.getElementById('btnStudentTab' + s.charAt(0).toUpperCase() + s.slice(1));
+        const pane = document.getElementById('student' + s.charAt(0).toUpperCase() + s.slice(1) + 'Section');
+        if (btn) btn.classList.toggle('active', s === sec);
+        if (pane) pane.classList.toggle('active', s === sec);
+      });
+      if (sec === 'message') {
+        setTimeout(() => {
+          const input = document.getElementById('studentDirectMsg');
+          if (input) input.focus();
+        }, 120);
+      } else if (sec === 'track') {
+        setTimeout(() => {
+          const input = document.getElementById('trackCodeInput');
+          if (input) input.focus();
+        }, 120);
+      }
+    }
+
+    function updateCharCount(el) {
+      const counter = document.getElementById('charCountSpan');
+      if (counter) {
+        counter.innerText = `${el.value.length} / ${el.maxLength || 1000}`;
+      }
+    }
+
+    function toggleContactMode(isAnon) {
+      isAnonymousContact = isAnon;
+      const optAnon = document.getElementById('optAnon');
+      const optNamed = document.getElementById('optNamed');
+      const wrap = document.getElementById('contactInputWrap');
+      if (isAnon) {
+        if (optAnon) optAnon.classList.add('selected');
+        if (optNamed) optNamed.classList.remove('selected');
+        if (wrap) wrap.style.display = 'none';
+        document.getElementById('studentDirectContact').value = '';
+      } else {
+        if (optAnon) optAnon.classList.remove('selected');
+        if (optNamed) optNamed.classList.add('selected');
+        if (wrap) wrap.style.display = 'block';
+        setTimeout(() => document.getElementById('studentDirectContact').focus(), 80);
+      }
+    }
+
+    function selectTicketCategory(chipEl, categoryName) {
+      document.querySelectorAll('#studentMessageBoxContainer .category-chip').forEach(c => c.classList.remove('selected'));
+      chipEl.classList.add('selected');
+      currentTicketCategory = categoryName;
+    }
+
+    async function submitDirectTicket() {
+      const msg = document.getElementById('studentDirectMsg').value.trim();
+      if (!msg) {
+        alert('يرجى كتابة رسالتك أو استشارتك أولاً قبل الإرسال.');
+        document.getElementById('studentDirectMsg').focus();
+        return;
+      }
+
+      const btn = document.getElementById('btnSubmitStudentTicket');
+      btn.disabled = true;
+      btn.innerText = 'جاري إرسال الرسالة بسرية للمرشد...';
+
+      let contact = 'طالب مجهول الهوية 100%';
+      if (!isAnonymousContact) {
+        const contactVal = document.getElementById('studentDirectContact').value.trim();
+        if (contactVal) contact = contactVal;
+      }
+
+      let ticketCode = 'TKT-' + Math.floor(1000 + Math.random() * 9000);
+
+      try {
+        const res = await fetch('/api/tickets', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            message: msg,
+            contact: contact,
+            category: currentTicketCategory
+          })
+        });
+        const data = await res.json();
+        if (res.ok && data.success && data.ticket) {
+          ticketCode = data.ticket.code;
+        }
+      } catch (e) {
+        clientLog.warn('Ticket saved locally due to offline network', e);
+      }
+
+      const tickets = safeGetStorage('tomanina_tickets', []);
+      tickets.unshift({
+        id: Date.now(),
+        code: ticketCode,
+        category: currentTicketCategory,
+        message: msg,
+        contact: contact,
+        status: 'NEW',
+        timestamp: Date.now(),
+        counselorReply: null,
+        replyTimestamp: null
+      });
+      safeSetStorage('tomanina_tickets', tickets);
+
+      btn.disabled = false;
+      btn.innerHTML = '<span>🕊️</span><span>إرسال الرسالة بسرية تامة للمرشد</span>';
+
+      document.getElementById('studentMsgFormWrap').style.display = 'none';
+      document.getElementById('createdTicketCode').innerText = ticketCode;
+      document.getElementById('studentTicketSuccessCard').style.display = 'block';
+      clientLog.info('Direct student ticket submitted', { code: ticketCode });
+    }
+
+    function copyTicketCode() {
+      const code = document.getElementById('createdTicketCode').innerText.trim();
+      if (!code) return;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(code).then(() => {
+          alert(`تم نسخ كود المتابعة: ${code}`);
+        }).catch(() => {
+          prompt('انسخ كود التذكرة:', code);
+        });
+      } else {
+        prompt('انسخ كود التذكرة:', code);
+      }
+    }
+
+    function trackCurrentTicket() {
+      const code = document.getElementById('createdTicketCode').innerText.trim();
+      switchStudentSection('track');
+      document.getElementById('trackCodeInput').value = code;
+      performTrackTicket();
+    }
+
+    async function performTrackTicket() {
+      const codeInput = document.getElementById('trackCodeInput');
+      const code = (codeInput.value || '').trim().toUpperCase();
+      const errBox = document.getElementById('trackErrorMsg');
+      const resultBox = document.getElementById('trackResultBox');
+
+      if (!code) {
+        errBox.innerText = 'يرجى إدخال كود التذكرة (مثال: TKT-1234)';
+        errBox.style.display = 'block';
+        resultBox.style.display = 'none';
+        codeInput.focus();
+        return;
+      }
+
+      errBox.style.display = 'none';
+
+      // 1. Try fetching from server
+      let ticketData = null;
+      try {
+        const res = await fetch(`/api/tickets/track?code=${encodeURIComponent(code)}`);
+        const data = await res.json();
+        if (res.ok && data.success && data.ticket) {
+          ticketData = data.ticket;
+        }
+      } catch (e) {
+        clientLog.warn('Server query failed, falling back to local storage', e);
+      }
+
+      // 2. Fallback to local storage if offline or not on server yet
+      if (!ticketData) {
+        const localTickets = safeGetStorage('tomanina_tickets', []);
+        const local = localTickets.find(t => t.code.toUpperCase() === code);
+        if (local) {
+          ticketData = {
+            code: local.code,
+            category: local.category,
+            status: local.status,
+            timestamp: local.timestamp,
+            hasReply: !!local.counselorReply,
+            counselorReply: local.counselorReply || null,
+            replyTimestamp: local.replyTimestamp || null
+          };
+        }
+      }
+
+      if (!ticketData) {
+        errBox.innerText = `لم يتم العثور على أي رسالة بالكود «${code}». تأكد من صحة الكود أو تواصل مع المرشد.`;
+        errBox.style.display = 'block';
+        resultBox.style.display = 'none';
+        return;
+      }
+
+      document.getElementById('trackResultCode').innerText = ticketData.code;
+      document.getElementById('trackResultCategory').innerText = ticketData.category || 'استشارة عامة';
+      document.getElementById('trackResultDate').innerText = new Date(ticketData.timestamp || Date.now()).toLocaleString('ar-SA', {
+        month: 'short', day: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit'
+      });
+
+      const statusEl = document.getElementById('trackResultStatus');
+      const replyWrap = document.getElementById('trackReplyContent');
+
+      if (ticketData.status === 'RESOLVED') {
+        statusEl.innerHTML = '<span style="background: #dcfce7; color: #15803d; padding: 4px 10px; border-radius: 10px; font-weight: 800; font-size: 12px;">🟢 تم الرد والدعم</span>';
+      } else if (ticketData.status === 'IN_PROGRESS') {
+        statusEl.innerHTML = '<span style="background: #e0f2fe; color: #0369a1; padding: 4px 10px; border-radius: 10px; font-weight: 800; font-size: 12px;">🔵 قيد المتابعة من المرشد</span>';
+      } else {
+        statusEl.innerHTML = '<span style="background: #fef9c3; color: #854d0e; padding: 4px 10px; border-radius: 10px; font-weight: 800; font-size: 12px;">🟡 تم الاستلام وجاري المراجعة</span>';
+      }
+
+      if (ticketData.counselorReply) {
+        const replyDate = ticketData.replyTimestamp
+          ? new Date(ticketData.replyTimestamp).toLocaleString('ar-SA', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })
+          : 'مؤخراً';
+        replyWrap.innerHTML = `
+          <div class="counselor-reply-box">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+              <strong style="color: #065f46; font-size: 14.5px; display: inline-flex; align-items: center; gap: 6px;">
+                <span>🌿</span>
+                <span>رد وتوجيه المرشد الطلابي (أ. مازن السبايله):</span>
+              </strong>
+              <span style="font-size: 11px; color: #047857;">${replyDate}</span>
+            </div>
+            <p style="font-size: 14px; line-height: 1.7; color: #064e3b; margin: 0; white-space: pre-line;">
+              ${escapeHtml(ticketData.counselorReply)}
+            </p>
+          </div>
+        `;
+      } else {
+        replyWrap.innerHTML = `
+          <div style="background: white; border: 1px dashed var(--slate-300); border-radius: 12px; padding: 16px; text-align: center; margin-top: 14px;">
+            <div style="font-size: 24px; margin-bottom: 4px;">⏳</div>
+            <strong style="font-size: 13.5px; color: var(--slate-700); display: block;">الرسالة قيد اطلاع المرشد الطلابي</strong>
+            <p style="font-size: 12px; color: var(--slate-500); margin: 4px 0 0 0;">
+              اطلع المرشد على رسالتك وجاري إعداد التوجيه المساند المناسب. يمكنك العودة والتحقق بنفس الكود في أي وقت.
+            </p>
+          </div>
+        `;
+      }
+
+      resultBox.style.display = 'block';
+    }
+
+    function resetStudentMsgForm() {
+      document.getElementById('studentDirectMsg').value = '';
+      document.getElementById('studentDirectContact').value = '';
+      updateCharCount(document.getElementById('studentDirectMsg'));
+      toggleContactMode(true);
+      document.getElementById('studentTicketSuccessCard').style.display = 'none';
+      document.getElementById('studentMsgFormWrap').style.display = 'block';
+    }
+
+    async function sendTicket() {
+      const msg = document.getElementById('ticketMsg').value.trim();
+      if (!msg) { alert('يرجى كتابة رسالتك أولاً.'); return; }
+      const contact = document.getElementById('ticketContact').value.trim() || 'طالب مجهول الهوية 100%';
+      let code = 'TKT-' + Math.floor(1000 + Math.random() * 9000);
+
+      try {
+        const res = await fetch('/api/tickets', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            message: msg,
+            contact: contact,
+            category: 'طلب دعم واستشارة'
+          })
+        });
+        const data = await res.json();
+        if (res.ok && data.success && data.ticket) {
+          code = data.ticket.code;
+        }
+      } catch (_) {}
+
+      const tickets = safeGetStorage('tomanina_tickets', []);
+      tickets.unshift({
+        id: Date.now(),
+        code: code,
+        category: 'طلب دعم واستشارة',
+        message: msg,
+        contact: contact,
+        status: 'NEW',
+        timestamp: Date.now()
+      });
+      safeSetStorage('tomanina_tickets', tickets);
+
+      document.getElementById('ticketMsg').value = '';
+      document.getElementById('ticketContact').value = '';
+      closeTicketModal();
+      alert(`✅ تم إرسال رسالتك بسرية تامة للمرشد الطلابي.\nكود المتابعة الخاص بك: ${code}`);
+    }
+
+    // Executive Tab Switching Logic
+    function switchAdminTab(tabName) {
+      const tabs = ['analytics', 'tickets', 'team', 'pulses', 'tools'];
+      tabs.forEach(t => {
+        const btn = document.getElementById('tabBtn' + t.charAt(0).toUpperCase() + t.slice(1));
+        const pane = document.getElementById('tabPane' + t.charAt(0).toUpperCase() + t.slice(1));
+        if (btn) btn.classList.toggle('active', t === tabName);
+        if (pane) pane.classList.toggle('active', t === tabName);
+      });
+
+      if (tabName === 'analytics') {
+        const records = safeGetStorage('tomanina_records', []);
+        renderCharts(records);
+      } else if (tabName === 'tickets') {
+        renderTickets();
+      } else if (tabName === 'pulses') {
+        renderPulsesLog();
+      } else if (tabName === 'team') {
+        renderTeamMembers();
+      }
+    }
+
+    async function refreshDashboardData() {
+      await Promise.all([
+        syncTeamMembersFromServer(),
+        syncTicketsFromServer()
+      ]);
+      renderDashboard();
+      renderTickets();
+      renderTeamMembers();
+      renderPulsesLog();
+      alert('🔄 تم تحديث كافة بيانات ومؤشرات لوحة التحكم بنجاح.');
+    }
+
+    // Current Logged User Profile (Default: Super Admin Mazen Al-Sabaileh)
+    let currentLoggedUser = {
+      id: 1,
+      name: 'أ. مازن السبايله',
+      email: 'mazensabaeleh@gmail.com',
+      role: 'المشرف العام',
+      isOwner: true
+    };
+
+    // Chart.js State
+    let chartInstance = null;
+    let currentChartType = 'timeline';
+
+    function initTeamMembers() {
+      let members = safeGetStorage('tomanina_team_members', null);
+      if (!members || members.length === 0) {
+        members = [
+          {
+            id: 1,
+            name: 'أ. مازن السبايله',
+            email: 'mazensabaeleh@gmail.com',
+            role: 'المشرف العام',
+            permissions: 'كامل الصلاحيات (الوصول الحصري للرسائل السرية وإدارة الفريق)',
+            isOwner: true
+          },
+          {
+            id: 2,
+            name: 'د. عبد الرحمن القرني',
+            email: 'counselor.amal@edu.sa',
+            role: 'مرشد طلابي مساعد',
+            permissions: 'اطلاع على بيانات واستجابات النبضات فقط (محظور من الرسائل السرية)',
+            isOwner: false
+          },
+          {
+            id: 3,
+            name: 'أ. سارة المنصور',
+            email: 'sarah.psych@edu.sa',
+            role: 'أخصائية استجابات وتوجيه',
+            permissions: 'اطلاع على بيانات واستجابات النبضات فقط (محظور من الرسائل السرية)',
+            isOwner: false
+          }
+        ];
+        safeSetStorage('tomanina_team_members', members);
+      }
+      return members;
+    }
+
+    // Secure Server-side Authentication Call (Credentials completely hidden from client source)
+    async function handleCounselorLogin() {
+      const email = document.getElementById('loginEmail').value.trim();
+      const password = document.getElementById('loginPass').value.trim();
+      const errBox = document.getElementById('loginErrorMsg');
+      const btn = document.getElementById('loginBtn');
+
+      if (!email || !password) {
+        errBox.innerText = 'يرجى إدخال البريد الإلكتروني وكلمة المرور.';
+        errBox.style.display = 'block';
+        return;
+      }
+
+      btn.disabled = true;
+      btn.innerText = 'جاري التحقق...';
+
+      try {
+        const response = await fetch('/api/counselor/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        });
+
+        const resData = await response.json();
+
+        if (response.ok && resData.success) {
+          isCounselorAuthenticated = true;
+          sessionStorage.setItem('tmn_session', resData.token);
+          currentLoggedUser = {
+            id: 1,
+            name: resData.name || 'أ. مازن السبايله',
+            email: email,
+            role: 'المشرف العام',
+            isOwner: true
+          };
+          closeCounselorModal();
+          showDashboard(currentLoggedUser.name);
+        } else {
+          errBox.innerText = resData.message || 'بيانات الدخول غير صحيحة. يرجى مراجعة المشرف العام.';
+          errBox.style.display = 'block';
+        }
+      } catch (e) {
+        errBox.innerText = 'تعذر الاتصال بالخادم، يرجى المحاولة لاحقاً.';
+        errBox.style.display = 'block';
+      } finally {
+        btn.disabled = false;
+        btn.innerText = 'دخول لوحة التحكم';
+      }
+    }
+
+    function showDashboard(name) {
+      document.getElementById('studentMainView').style.display = 'none';
+      document.getElementById('counselorDashboardView').style.display = 'block';
+      
+      initTeamMembers();
+      syncTeamMembersFromServer();
+      syncTicketsFromServer();
+
+      if (currentLoggedUser.isOwner) {
+        document.getElementById('adminWelcomeText').innerText = `المشرف العام: ${currentLoggedUser.name} • كامل الصلاحيات المعتمدة`;
+        document.getElementById('ticketsRestrictedBanner').style.display = 'none';
+        document.getElementById('ticketsAuthorizedContent').style.display = 'block';
+        document.getElementById('btnAddMemberBtn').style.display = 'inline-block';
+      } else {
+        document.getElementById('adminWelcomeText').innerText = `عضو فريق العمل: ${currentLoggedUser.name} (${currentLoggedUser.role}) • اطلاع على الاستجابات فقط`;
+        document.getElementById('ticketsRestrictedBanner').style.display = 'block';
+        document.getElementById('ticketsAuthorizedContent').style.display = 'none';
+        document.getElementById('btnAddMemberBtn').style.display = 'none';
+      }
+
+      switchAdminTab('analytics');
+      renderDashboard();
+      renderTeamMembers();
+    }
+
+    function logoutCounselor() {
+      isCounselorAuthenticated = false;
+      sessionStorage.removeItem('tmn_session');
+      currentLoggedUser = {
+        id: 1,
+        name: 'أ. مازن السبايله',
+        email: 'mazensabaeleh@gmail.com',
+        role: 'المشرف العام',
+        isOwner: true
+      };
+      document.getElementById('counselorDashboardView').style.display = 'none';
+      document.getElementById('studentMainView').style.display = 'block';
+    }
+
+    function filterTime(type, el) {
+      document.querySelectorAll('.time-filter-wrap .reason-chip').forEach(c => c.classList.remove('selected'));
+      el.classList.add('selected');
+      currentTimeFilter = type;
+      renderDashboard();
+    }
+
+    // Team Members Management Functions
+    async function syncTeamMembersFromServer() {
+      const token = sessionStorage.getItem('tmn_session');
+      if (!token) return;
+      try {
+        const res = await fetch('/api/counselor/team', {
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+        const data = await res.json();
+        if (res.ok && data.success && Array.isArray(data.members)) {
+          safeSetStorage('tomanina_team_members', data.members);
+          renderTeamMembers();
+        }
+      } catch (e) {
+        clientLog.warn('Failed to sync team members from server, using local cache', e);
+      }
+    }
+
+    function openAddMemberModal() {
+      const errBox = document.getElementById('addMemberError');
+      if (errBox) errBox.style.display = 'none';
+      document.getElementById('newMemberName').value = '';
+      document.getElementById('newMemberEmail').value = '';
+      document.getElementById('addMemberModal').style.display = 'flex';
+      setTimeout(() => document.getElementById('newMemberName').focus(), 100);
+    }
+
+    function closeAddMemberModal() {
+      document.getElementById('addMemberModal').style.display = 'none';
+    }
+
+    async function saveNewTeamMember() {
+      const name = document.getElementById('newMemberName').value.trim();
+      const email = document.getElementById('newMemberEmail').value.trim();
+      const role = document.getElementById('newMemberRole').value;
+      const errBox = document.getElementById('addMemberError');
+      const btn = document.getElementById('btnSaveMember');
+
+      if (!name) {
+        errBox.innerText = 'يرجى إدخال اسم العضو الكامل.';
+        errBox.style.display = 'block';
+        return;
+      }
+
+      if (!email) {
+        errBox.innerText = 'يرجى إدخال البريد الإلكتروني للعضو.';
+        errBox.style.display = 'block';
+        return;
+      }
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        errBox.innerText = 'يرجى إدخال صيغة بريد إلكتروني صحيحة (مثال: name@school.edu.sa)';
+        errBox.style.display = 'block';
+        return;
+      }
+
+      btn.disabled = true;
+      btn.innerText = 'جاري الحفظ والتحقق...';
+
+      const token = sessionStorage.getItem('tmn_session');
+      if (token) {
+        try {
+          const res = await fetch('/api/counselor/team', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({
+              name: name,
+              email: email,
+              role: role,
+              permissions: 'اطلاع على بيانات واستجابات النبضات فقط (محظور من الرسائل السرية)'
+            })
+          });
+          const data = await res.json();
+          if (!res.ok || !data.success) {
+            errBox.innerText = data.message || 'تعذر إضافة العضو على الخادم.';
+            errBox.style.display = 'block';
+            btn.disabled = false;
+            btn.innerText = '💾 حفظ وإضافة العضو الآن';
+            return;
+          }
+        } catch (e) {
+          clientLog.warn('Network issue while calling team API, continuing locally', e);
+        }
+      }
+
+      const members = initTeamMembers();
+      if (!members.some(m => m.email.toLowerCase() === email.toLowerCase())) {
+        members.push({
+          id: Date.now(),
+          name: name,
+          email: email.toLowerCase(),
+          role: role,
+          permissions: 'اطلاع على بيانات واستجابات النبضات فقط (محظور من الرسائل السرية)',
+          isOwner: false
+        });
+        safeSetStorage('tomanina_team_members', members);
+      }
+
+      btn.disabled = false;
+      btn.innerText = '💾 حفظ وإضافة العضو الآن';
+      closeAddMemberModal();
+      renderTeamMembers();
+      alert(`✅ تم بنجاح تفعيل صلاحيات العضو الجديد:\n• الاسم: ${name}\n• البريد الإلكتروني: ${email}\n• الدور: ${role}\n• الصلاحية: الاطلاع على الاستجابات وتحليل المشاعر مع حجب الرسائل السرية.`);
+    }
+
+    async function deleteTeamMember(id) {
+      let members = initTeamMembers();
+      const target = members.find(m => m.id === id);
+      if (!target) return;
+
+      if (target.isOwner || target.email.toLowerCase() === 'mazensabaeleh@gmail.com') {
+        alert('لا يمكن حذف حساب المشرف العام والمالك الأساسي للمنصة (أ. مازن السبايله).');
+        return;
+      }
+
+      const confirmed = confirm(`⚠️ تنبيه المشرف العام (أ. مازن السبايله):\nهل ترغب بالتأكيد في حذف هذا العضو من فريق العمل وإلغاء صلاحياته؟\n\n• الاسم: ${target.name}\n• البريد: ${target.email}`);
+      if (!confirmed) return;
+
+      const token = sessionStorage.getItem('tmn_session');
+      if (token) {
+        try {
+          const res = await fetch(`/api/counselor/team/${id}`, {
+            method: 'DELETE',
+            headers: { 'Authorization': `Bearer ${token}` }
+          });
+          const data = await res.json();
+          if (!res.ok || !data.success) {
+            clientLog.warn('Server delete issue', data);
+          }
+        } catch (e) {
+          clientLog.warn('Network issue during delete', e);
+        }
+      }
+
+      members = members.filter(m => m.id !== id);
+      safeSetStorage('tomanina_team_members', members);
+      renderTeamMembers();
+      alert(`🗑️ تم بنجاح حذف العضو «${target.name}» (${target.email}) وإلغاء صلاحياته من المنظومة.`);
+    }
+
+    function switchActiveMember(id) {
+      const members = initTeamMembers();
+      const target = members.find(m => m.id === id);
+      if (!target) return;
+      currentLoggedUser = { ...target };
+      showDashboard(currentLoggedUser.name);
+      alert(`تم تبديل الحساب النشط للمعاينة إلى: ${target.name} (${target.role})\nنطاق الصلاحية: ${target.isOwner ? 'كامل الصلاحيات (المشرف العام)' : 'استعراض الاستجابات فقط (محظور من الرسائل السرية)'}`);
+    }
+
+    function renderTeamMembers() {
+      const members = initTeamMembers();
+      const tbody = document.getElementById('teamMembersBody');
+      if (!tbody) return;
+
+      tbody.innerHTML = members.map(m => {
+        const isActive = m.id === currentLoggedUser.id;
+        return `
+          <tr style="border-bottom: 1px solid var(--slate-200); ${isActive ? 'background: rgba(13, 148, 136, 0.06);' : ''}">
+            <td style="padding: 12px 10px;">
+              <strong>${escapeHtml(m.name)}</strong>
+              ${m.isOwner ? '<span style="background: #fef3c7; color: #b45309; padding: 2px 8px; border-radius: 6px; font-size: 11px; font-weight: 800; margin-right: 6px; border: 1px solid #fde68a;">👑 المشرف العام</span>' : ''}
+              ${isActive ? '<span style="background: #ccfbf1; color: #0f766e; padding: 2px 8px; border-radius: 6px; font-size: 11px; font-weight: 800; margin-right: 6px;">● الحساب النشط</span>' : ''}
+            </td>
+            <td style="padding: 12px 10px; color: var(--slate-700); font-family: monospace; font-size: 12.5px; font-weight: 600;">${escapeHtml(m.email)}</td>
+            <td style="padding: 12px 10px;"><span style="background: var(--slate-100); padding: 4px 10px; border-radius: 6px; font-size: 11.5px; font-weight: 700; color: var(--slate-800);">${escapeHtml(m.role)}</span></td>
+            <td style="padding: 12px 10px;">
+              <span style="font-size: 12px; font-weight: 700; color: ${m.isOwner ? 'var(--emerald)' : '#dc2626'}; display: inline-flex; align-items: center; gap: 4px;">
+                ${m.isOwner ? '⚡ كامل الصلاحيات والتحكم' : '🔒 استعراض الاستجابات فقط (محظور من الرسائل السرية)'}
+              </span>
+            </td>
+            <td style="padding: 12px 10px; text-align: center;">
+              <div style="display: flex; gap: 8px; justify-content: center; align-items: center;">
+                ${!isActive ? `<button class="invite-btn" style="padding: 5px 10px; font-size: 11px; background: var(--teal); color: white; border-radius: 6px;" onclick="switchActiveMember(${m.id})">تبديل للمعاينة</button>` : ''}
+                ${!m.isOwner ? `<button class="invite-btn" style="padding: 6px 14px; font-size: 12px; background: #fee2e2; color: #dc2626; border: 1.5px solid #f87171; font-weight: 800; border-radius: 8px; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.background='#fecaca'" onmouseout="this.style.background='#fee2e2'" onclick="deleteTeamMember(${m.id})">🗑️ حذف العضو</button>` : ''}
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    // Chart.js Visualizations
+    function setChartType(type) {
+      currentChartType = type;
+      document.getElementById('btnChartTimeline')?.classList.toggle('selected', type === 'timeline');
+      document.getElementById('btnChartDoughnut')?.classList.toggle('selected', type === 'doughnut');
+      document.getElementById('btnChartBar')?.classList.toggle('selected', type === 'bar');
+      const records = safeGetStorage('tomanina_records', []);
+      const now = Date.now();
+      const filtered = records.filter(r => {
+        if (currentTimeFilter === 'TODAY') return r.timestamp >= (now - 24 * 3600000);
+        if (currentTimeFilter === 'WEEK') return r.timestamp >= (now - 7 * 24 * 3600000);
+        if (currentTimeFilter === 'MONTH') return r.timestamp >= (now - 30 * 24 * 3600000);
+        return true;
+      });
+      renderCharts(filtered);
+    }
+
+    function renderCharts(filteredRecords) {
+      const canvas = document.getElementById('emotionsChart');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      if (chartInstance) {
+        chartInstance.destroy();
+        chartInstance = null;
+      }
+
+      const counts = { JOY: 0, CALM: 0, SAD: 0, ANXIOUS: 0, EXHAUSTED: 0, BORED: 0, ANGRY: 0, FEAR: 0 };
+      (filteredRecords || []).forEach(r => {
+        if (counts[r.emotion] !== undefined) counts[r.emotion]++;
+      });
+
+      const labels = ['الفرح 😊', 'الهدوء 🌿', 'الحزن 🌧️', 'القلق ⚡', 'الإرهاق 🔋', 'الملل ⏳', 'الغضب 🔥', 'الخوف 🛡️'];
+      const data = [counts.JOY, counts.CALM, counts.SAD, counts.ANXIOUS, counts.EXHAUSTED, counts.BORED, counts.ANGRY, counts.FEAR];
+      const bgColors = [
+        '#d97706', '#059669', '#2563eb', '#7c3aed',
+        '#475569', '#78716c', '#dc2626', '#4f46e5'
+      ];
+
+      if (typeof Chart === 'undefined') {
+        // Fallback canvas drawing if offline
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.font = '14px Cairo, sans-serif';
+        ctx.fillStyle = '#0f172a';
+        ctx.textAlign = 'center';
+        ctx.fillText('جاري تحميل مكتبة Chart.js التفاعلية...', canvas.width / 2, canvas.height / 2);
+        return;
+      }
+
+      if (currentChartType === 'doughnut') {
+        chartInstance = new Chart(ctx, {
+          type: 'doughnut',
+          data: {
+            labels: labels,
+            datasets: [{
+              data: data,
+              backgroundColor: bgColors,
+              borderWidth: 2,
+              borderColor: '#ffffff'
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: { position: 'bottom', labels: { font: { family: 'Cairo' } } },
+              tooltip: { rtl: true, textDirection: 'rtl', bodyFont: { family: 'Cairo' } }
+            }
+          }
+        });
+      } else if (currentChartType === 'bar') {
+        chartInstance = new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: labels,
+            datasets: [{
+              label: 'عدد الاستجابات المسجلة',
+              data: data,
+              backgroundColor: bgColors,
+              borderRadius: 8
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: { display: false },
+              tooltip: { rtl: true, textDirection: 'rtl', bodyFont: { family: 'Cairo' } }
+            },
+            scales: {
+              y: { beginAtZero: true, ticks: { precision: 0, font: { family: 'Cairo' } } },
+              x: { ticks: { font: { family: 'Cairo' } } }
+            }
+          }
+        });
+      } else {
+        // Timeline chart
+        const timeLabels = ['8:00 ص', '9:30 ص', '11:00 ص', '12:30 م', '2:00 م', 'الآن'];
+        const calmJoyTrend = [
+          Math.max(1, Math.round(counts.CALM * 0.4)),
+          Math.max(2, Math.round(counts.JOY * 0.5)),
+          counts.CALM,
+          counts.JOY,
+          counts.CALM,
+          counts.JOY + counts.CALM
+        ];
+        const stressTrend = [
+          Math.round(counts.ANXIOUS * 0.3),
+          Math.round(counts.SAD * 0.4),
+          counts.EXHAUSTED,
+          counts.ANXIOUS,
+          counts.BORED,
+          counts.ANXIOUS + counts.EXHAUSTED
+        ];
+
+        chartInstance = new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels: timeLabels,
+            datasets: [
+              {
+                label: 'المشاعر الإيجابية (الهدوء والفرح)',
+                data: calmJoyTrend,
+                borderColor: '#059669',
+                backgroundColor: 'rgba(5, 150, 105, 0.15)',
+                fill: true,
+                tension: 0.35,
+                borderWidth: 3
+              },
+              {
+                label: 'مشاعر تحتاج مساندة (القلق والإرهاق والحزن)',
+                data: stressTrend,
+                borderColor: '#7c3aed',
+                backgroundColor: 'rgba(124, 58, 237, 0.1)',
+                fill: true,
+                tension: 0.35,
+                borderWidth: 2
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: { position: 'top', labels: { font: { family: 'Cairo' } } },
+              tooltip: { rtl: true, textDirection: 'rtl', bodyFont: { family: 'Cairo' } }
+            },
+            scales: {
+              y: { beginAtZero: true, ticks: { precision: 0, font: { family: 'Cairo' } } },
+              x: { ticks: { font: { family: 'Cairo' } } }
+            }
+          }
+        });
+      }
+    }
+
+    function renderDashboard() {
+      const records = safeGetStorage('tomanina_records', []);
+      const now = Date.now();
+      const filtered = records.filter(r => {
+        if (currentTimeFilter === 'TODAY') return r.timestamp >= (now - 24 * 3600000);
+        if (currentTimeFilter === 'WEEK') return r.timestamp >= (now - 7 * 24 * 3600000);
+        if (currentTimeFilter === 'MONTH') return r.timestamp >= (now - 30 * 24 * 3600000);
+        return true;
+      });
+
+      const total = filtered.length;
+      document.getElementById('statTotal').innerText = total;
+
+      const positive = filtered.filter(r => ['JOY', 'CALM', 'BORED'].includes(r.emotion)).length;
+      const rate = total > 0 ? Math.round((positive / total) * 100) : 100;
+      document.getElementById('statRate').innerText = `${rate}%`;
+
+      const counts = {};
+      filtered.forEach(r => { counts[r.emotion] = (counts[r.emotion] || 0) + 1; });
+      let dominant = null;
+      let maxCount = 0;
+      for (const [k, v] of Object.entries(counts)) {
+        if (v > maxCount) { maxCount = v; dominant = k; }
+      }
+
+      const names = {
+        JOY: 'الفرح 😊', CALM: 'الهدوء 🌿', SAD: 'الحزن 🌧️', ANXIOUS: 'القلق ⚡',
+        EXHAUSTED: 'الإرهاق 🔋', BORED: 'الملل ⏳', ANGRY: 'الغضب 🔥', FEAR: 'الخوف 🛡️'
+      };
+      
+      const initBox = document.getElementById('initiativesBox');
+
+      if (total === 0) {
+        document.getElementById('statDominant').innerText = 'لا توجد بيانات';
+        initBox.innerHTML = `
+          <div style="border-right: 4px solid var(--slate-300); padding: 14px; background: #f8fafc; border-radius: 12px; margin-top: 10px; text-align: center;">
+            <strong style="color: var(--slate-600); font-size: 14px;">لا توجد نبضات مسجلة في هذا النطاق الزمني</strong>
+            <p style="font-size: 13px; color: var(--slate-400); margin-top: 4px;">شارك رابط المنصة مع الطلاب لبدء استقبال المؤشرات النفسية وتحليلها تلقائياً.</p>
+          </div>
+        `;
+      } else {
+        document.getElementById('statDominant').innerText = names[dominant] || 'الهدوء 🌿';
+        if (dominant === 'ANXIOUS' || dominant === 'EXHAUSTED') {
+          initBox.innerHTML = `
+            <div style="border-right: 4px solid var(--angry-color); padding: 12px; background: #fff5f5; border-radius: 12px; margin-top: 10px;">
+              <strong style="color: #991b1b; font-size: 15px;">مبادرة «واحة الطمأنينة وإدارة الضغوط المدرسية»</strong>
+              <p style="font-size: 13px; color: var(--slate-700); margin-top: 4px;">جلسات إرشاد جماعية لتقنيات تنظيم وقت المذاكرة وتمارين التنفس في حصص النشاط المدرسي.</p>
+            </div>
+          `;
+        } else {
+          initBox.innerHTML = `
+            <div style="border-right: 4px solid var(--emerald); padding: 12px; background: #f0fdf4; border-radius: 12px; margin-top: 10px;">
+              <strong style="color: #166534; font-size: 15px;">مبادرة «سفراء الطمأنينة والإلهام الطلابي»</strong>
+              <p style="font-size: 13px; color: var(--slate-700); margin-top: 4px;">تعزيز البيئة المدرسية الإيجابية والمجتمع المحلي عبر أنشطة تطوعية ومسابقات التقدير المتبادل.</p>
+            </div>
+          `;
+        }
+      }
+
+      // Render Chart.js Visualizations
+      renderCharts(filtered);
+
+      // Render Sub-sections
+      renderTickets();
+      renderPulsesLog();
+    }
+
+    let currentTicketStatusFilter = 'ALL';
+    function filterTicketsByStatus(status, el) {
+      currentTicketStatusFilter = status;
+      document.querySelectorAll('#tabPaneTickets .reason-chip').forEach(c => c.classList.remove('selected'));
+      if (el) el.classList.add('selected');
+      renderTickets();
+    }
+
+    async function syncTicketsFromServer() {
+      const token = sessionStorage.getItem('tmn_session');
+      if (!token) return;
+      try {
+        const res = await fetch('/api/counselor/tickets', {
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+        const data = await res.json();
+        if (res.ok && data.success && Array.isArray(data.tickets)) {
+          safeSetStorage('tomanina_tickets', data.tickets);
+          renderTickets();
+        }
+      } catch (e) {
+        clientLog.warn('Failed to sync tickets from server, using local store', e);
+      }
+    }
+
+    let currentReplyTicketId = null;
+
+    function openReplyModal(id) {
+      const tickets = safeGetStorage('tomanina_tickets', []);
+      const ticket = tickets.find(t => t.id === id);
+      if (!ticket) return;
+
+      currentReplyTicketId = id;
+      document.getElementById('replyModalTicketCode').innerText = ticket.code;
+      document.getElementById('replyModalCategory').innerText = ticket.category || 'استشارة عامة';
+      document.getElementById('replyModalContact').innerText = ticket.contact || 'طالب مجهول';
+      document.getElementById('replyModalDate').innerText = new Date(ticket.timestamp || Date.now()).toLocaleString('ar-SA');
+      document.getElementById('replyModalMessage').innerText = ticket.message;
+      document.getElementById('counselorReplyText').value = ticket.counselorReply || '';
+      document.getElementById('replyModalStatus').value = ticket.status === 'NEW' ? 'RESOLVED' : ticket.status;
+      
+      const errBox = document.getElementById('replyModalError');
+      if (errBox) errBox.style.display = 'none';
+
+      document.getElementById('counselorReplyModal').style.display = 'flex';
+      setTimeout(() => document.getElementById('counselorReplyText').focus(), 100);
+    }
+
+    function closeCounselorReplyModal() {
+      document.getElementById('counselorReplyModal').style.display = 'none';
+      currentReplyTicketId = null;
+    }
+
+    async function saveCounselorReply() {
+      if (!currentReplyTicketId) return;
+      const reply = document.getElementById('counselorReplyText').value.trim();
+      const status = document.getElementById('replyModalStatus').value;
+      const errBox = document.getElementById('replyModalError');
+      const btn = document.getElementById('btnSendCounselorReply');
+
+      if (!reply) {
+        if (errBox) {
+          errBox.innerText = 'يرجى كتابة نص التوجيه والرد الإرشادي قبل الحفظ.';
+          errBox.style.display = 'block';
+        }
+        return;
+      }
+
+      btn.disabled = true;
+      btn.innerText = 'جاري إرسال الرد...';
+
+      // 1. Try sending to server
+      const token = sessionStorage.getItem('tmn_session');
+      if (token) {
+        try {
+          await fetch(`/api/counselor/tickets/${currentReplyTicketId}/reply`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({ reply, status })
+          });
+        } catch (e) {
+          clientLog.warn('Failed to post reply to server, caching locally', e);
+        }
+      }
+
+      // 2. Update local storage
+      const tickets = safeGetStorage('tomanina_tickets', []);
+      const ticket = tickets.find(t => t.id === currentReplyTicketId);
+      if (ticket) {
+        ticket.counselorReply = reply;
+        ticket.replyTimestamp = Date.now();
+        ticket.status = status;
+        safeSetStorage('tomanina_tickets', tickets);
+      }
+
+      btn.disabled = false;
+      btn.innerText = '💾 إرسال الرد وحفظ التوجيه';
+      closeCounselorReplyModal();
+      renderTickets();
+      alert('✅ تم إرسال وتوثيق الرد الإرشادي للطالب بنجاح.');
+    }
+
+    function renderTickets() {
+      const allTickets = safeGetStorage('tomanina_tickets', []);
+      const badgeCountEl = document.getElementById('ticketsBadgeCount');
+      const statTicketsTotalEl = document.getElementById('statTicketsTotal');
+      const headerCountBadge = document.getElementById('ticketHeaderCountBadge');
+      
+      const newCount = allTickets.filter(t => t.status === 'NEW').length;
+      if (badgeCountEl) badgeCountEl.innerText = newCount;
+      if (statTicketsTotalEl) statTicketsTotalEl.innerText = allTickets.length;
+
+      const searchInput = document.getElementById('ticketSearchInput');
+      const searchQuery = (searchInput ? searchInput.value : '').trim().toLowerCase();
+
+      const filtered = allTickets.filter(t => {
+        const matchesStatus = currentTicketStatusFilter === 'ALL' || t.status === currentTicketStatusFilter;
+        if (!matchesStatus) return false;
+        if (!searchQuery) return true;
+        const code = (t.code || '').toLowerCase();
+        const msg = (t.message || '').toLowerCase();
+        const contact = (t.contact || '').toLowerCase();
+        const cat = (t.category || '').toLowerCase();
+        return code.includes(searchQuery) || msg.includes(searchQuery) || contact.includes(searchQuery) || cat.includes(searchQuery);
+      });
+
+      if (headerCountBadge) headerCountBadge.innerText = `${filtered.length} تذكرة`;
+
+      const tbody = document.getElementById('ticketsBody');
+      if (!tbody) return;
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="7" style="text-align: center; padding: 26px; color: var(--slate-400);">
+              لا توجد رسائل مطابقة لهذا البحث أو التصنيف حالياً. كافة الطلاب في راحة وطمأنينة 🌿
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      const statusMap = {
+        'NEW': { label: '🟡 جديد', bg: '#fef9c3', color: '#854d0e' },
+        'IN_PROGRESS': { label: '🔵 قيد المتابعة', bg: '#e0f2fe', color: '#0369a1' },
+        'RESOLVED': { label: '🟢 تم الدعم والإغلاق', bg: '#dcfce7', color: '#15803d' }
+      };
+
+      tbody.innerHTML = filtered.map(t => {
+        const s = statusMap[t.status] || statusMap.NEW;
+        const d = new Date(t.timestamp || Date.now()).toLocaleString('ar-SA', {
+          month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit'
+        });
+
+        return `
+          <tr style="border-bottom: 1px solid var(--slate-200);">
+            <td style="padding: 12px 10px;">
+              <span style="font-family: monospace; font-weight: 800; color: var(--primary); background: var(--primary-bg); padding: 3px 8px; border-radius: 6px;">
+                ${escapeHtml(t.code)}
+              </span>
+            </td>
+            <td style="padding: 12px 10px;">
+              <span style="font-size: 11.5px; font-weight: 700; background: var(--slate-100); padding: 3px 8px; border-radius: 6px;">
+                ${escapeHtml(t.category || 'استشارة عامة')}
+              </span>
+            </td>
+            <td style="padding: 12px 10px; max-width: 320px; font-size: 13px; line-height: 1.6; color: var(--slate-800);">
+              ${escapeHtml(t.message)}
+              ${t.counselorReply ? `<div style="font-size: 11px; color: #047857; margin-top: 4px; font-weight: 700;">💬 تم الرد: «${escapeHtml(t.counselorReply.substring(0, 45))}...»</div>` : ''}
+            </td>
+            <td style="padding: 12px 10px; font-size: 12px; color: var(--slate-600);">
+              ${escapeHtml(t.contact || 'طالب مجهول')}
+            </td>
+            <td style="padding: 12px 10px; font-size: 11.5px; color: var(--slate-500); white-space: nowrap;">
+              ${d}
+            </td>
+            <td style="padding: 12px 10px;">
+              <span style="padding: 4px 10px; border-radius: 8px; font-size: 11.5px; font-weight: 800; background: ${s.bg}; color: ${s.color};">
+                ${s.label}
+              </span>
+            </td>
+            <td style="padding: 12px 10px; text-align: center;">
+              <div style="display: flex; gap: 6px; justify-content: center; align-items: center; flex-wrap: wrap;">
+                <button class="invite-btn" style="padding: 6px 12px; font-size: 11.5px; background: var(--primary); color: white; display: inline-flex; align-items: center; gap: 4px;" onclick="openReplyModal(${Number(t.id)})">
+                  <span>✍️</span>
+                  <span>الرد والتوجيه</span>
+                </button>
+                <button class="invite-btn" style="padding: 6px 10px; font-size: 11px; background: var(--teal); color: white;" onclick="toggleStatus(${Number(t.id)})">
+                  تحديث الحالة
+                </button>
+                <button class="invite-btn" style="padding: 6px 8px; font-size: 11px; background: #fee2e2; color: #dc2626;" onclick="deleteTicket(${Number(t.id)})">
+                  🗑️
+                </button>
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    async function toggleStatus(id) {
+      const tickets = safeGetStorage('tomanina_tickets', []);
+      const t = tickets.find(x => x.id === id);
+      if (t) {
+        t.status = t.status === 'NEW' ? 'IN_PROGRESS' : (t.status === 'IN_PROGRESS' ? 'RESOLVED' : 'NEW');
+        safeSetStorage('tomanina_tickets', tickets);
+        
+        const token = sessionStorage.getItem('tmn_session');
+        if (token) {
+          try {
+            await fetch(`/api/counselor/tickets/${id}`, {
+              method: 'PATCH',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+              },
+              body: JSON.stringify({ status: t.status })
+            });
+          } catch (_) {}
+        }
+        renderTickets();
+      }
+    }
+
+    async function deleteTicket(id) {
+      if (!confirm('هل ترغب بالتأكيد في حذف هذه التذكرة؟')) return;
+      let tickets = safeGetStorage('tomanina_tickets', []);
+      tickets = tickets.filter(t => t.id !== id);
+      safeSetStorage('tomanina_tickets', tickets);
+
+      const token = sessionStorage.getItem('tmn_session');
+      if (token) {
+        try {
+          await fetch(`/api/counselor/tickets/${id}`, {
+            method: 'DELETE',
+            headers: { 'Authorization': `Bearer ${token}` }
+          });
+        } catch (_) {}
+      }
+      renderTickets();
+    }
+
+    function renderPulsesLog() {
+      const records = safeGetStorage('tomanina_records', []);
+      const filterSelect = document.getElementById('pulseEmotionFilter');
+      const selectedFilter = filterSelect ? filterSelect.value : 'ALL';
+
+      const filtered = records.filter(r => {
+        if (selectedFilter === 'ALL') return true;
+        return r.emotion === selectedFilter;
+      });
+
+      const tbody = document.getElementById('pulsesLogBody');
+      if (!tbody) return;
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="4" style="text-align: center; padding: 24px; color: var(--slate-400);">
+              لا توجد استجابات مسجلة بهذا الشعور حالياً 🌿
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      const emotionMap = {
+        JOY: { name: 'الفرح 😊', bg: 'var(--joy-bg)', color: 'var(--joy-color)' },
+        CALM: { name: 'الهدوء 🌿', bg: 'var(--calm-bg)', color: 'var(--calm-color)' },
+        SAD: { name: 'الحزن 🌧️', bg: 'var(--sad-bg)', color: 'var(--sad-color)' },
+        ANXIOUS: { name: 'القلق ⚡', bg: 'var(--anxious-bg)', color: 'var(--anxious-color)' },
+        EXHAUSTED: { name: 'الإرهاق 🔋', bg: 'var(--exhausted-bg)', color: 'var(--exhausted-color)' },
+        BORED: { name: 'الملل ⏳', bg: 'var(--bored-bg)', color: 'var(--bored-color)' },
+        ANGRY: { name: 'الغضب 🔥', bg: 'var(--angry-bg)', color: 'var(--angry-color)' },
+        FEAR: { name: 'الخوف 🛡️', bg: 'var(--fear-bg)', color: 'var(--fear-color)' }
+      };
+
+      tbody.innerHTML = filtered.map(r => {
+        const emo = emotionMap[r.emotion] || emotionMap.CALM;
+        const d = new Date(r.timestamp).toLocaleString('ar-SA', {
+          month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit'
+        });
+
+        return `
+          <tr style="border-bottom: 1px solid var(--slate-200);">
+            <td style="padding: 12px 10px;">
+              <span style="background: ${emo.bg}; color: ${emo.color}; padding: 4px 10px; border-radius: 8px; font-size: 12px; font-weight: 800;">
+                ${emo.name}
+              </span>
+            </td>
+            <td style="padding: 12px 10px; font-size: 13px; font-weight: 600; color: var(--slate-700);">
+              ${escapeHtml(r.reason || 'شعور عام')}
+            </td>
+            <td style="padding: 12px 10px; font-size: 13px; color: var(--slate-800); max-width: 320px;">
+              ${r.note ? escapeHtml(r.note) : '<span style="color: var(--slate-400); font-style: italic;">(لا توجد كلمات مرفقة)</span>'}
+            </td>
+            <td style="padding: 12px 10px; font-size: 12px; color: var(--slate-500); white-space: nowrap;">
+              ${d}
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function downloadCsv() {
+      const records = safeGetStorage('tomanina_records', []);
+      if (records.length === 0) {
+        alert('لا توجد سجلات لتحميلها حالياً.');
+        return;
+      }
+      let csv = "data:text/csv;charset=utf-8,\uFEFF";
+      csv += "ID,Emotion,Reason,Note,Timestamp,Date_Time\n";
+      records.forEach(r => {
+        const d = new Date(r.timestamp).toLocaleString('ar-SA');
+        const cleanNote = sanitizeForCsv(r.note);
+        const cleanReason = sanitizeForCsv(r.reason);
+        const cleanEmotion = sanitizeForCsv(r.emotion);
+        csv += `${r.id},"${cleanEmotion}","${cleanReason}","${cleanNote}",${r.timestamp},"${d}"\n`;
+      });
+      const encodedUri = encodeURI(csv);
+      const link = document.createElement("a");
+      link.setAttribute("href", encodedUri);
+      link.setAttribute("download", `tomanina_data_${Date.now()}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      alert('تم تنزيل ملف CSV بنجاح!');
+    }
+
+    function exportJsonBackup() {
+      const records = safeGetStorage('tomanina_records', []);
+      const tickets = safeGetStorage('tomanina_tickets', []);
+      const backupData = {
+        platform: 'Tomanina_Pulse',
+        version: '1.0',
+        exportedAt: new Date().toISOString(),
+        timestamp: Date.now(),
+        data: {
+          records: records,
+          tickets: tickets
+        }
+      };
+      const jsonStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(backupData, null, 2));
+      const link = document.createElement("a");
+      link.setAttribute("href", jsonStr);
+      link.setAttribute("download", `tomanina_full_backup_${Date.now()}.json`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      clientLog.info('JSON backup exported', { recordsCount: records.length, ticketsCount: tickets.length });
+      alert('تم تصدير النسخة الاحتياطية الكاملة للمنصة بنجاح!');
+    }
+
+    function importJsonBackup(input) {
+      const file = input.files && input.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        try {
+          const parsed = JSON.parse(e.target.result);
+          if (parsed && parsed.data && Array.isArray(parsed.data.records) && Array.isArray(parsed.data.tickets)) {
+            if (confirm(`هل ترغب باسترجاع النسخة الاحتياطية بتاريخ ${parsed.exportedAt || 'سابق'} وتتضمن ${parsed.data.records.length} نبضة و ${parsed.data.tickets.length} طلب استشارة؟`)) {
+              safeSetStorage('tomanina_records', parsed.data.records);
+              safeSetStorage('tomanina_tickets', parsed.data.tickets);
+              renderDashboard();
+              clientLog.info('JSON backup restored successfully');
+              alert('تم استرجاع النسخة الاحتياطية وتحديث لوحة البيانات بنجاح!');
+            }
+          } else {
+            alert('خطأ: ملف النسخة الاحتياطية غير متوافق أو تالف.');
+          }
+        } catch (err) {
+          clientLog.error('Backup restore error', err);
+          alert('تعذر قراءة ملف النسخة الاحتياطية.');
+        }
+        input.value = '';
+      };
+      reader.readAsText(file);
+    }
+
+    function wipeData() {
+      if (confirm('تنبيه للمشرف: هل ترغب بالتأكيد في مسح وتطهير سجلات النبضات وإعادة الضبط؟')) {
+        safeSetStorage('tomanina_records', []);
+        renderDashboard();
+        alert('تم تطهير البيانات وإعادة الضبط بنجاح.');
+      }
+    }
+  </script>
+</body>
+</html>
